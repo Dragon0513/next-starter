@@ -1,0 +1,49 @@
+{
+  "name": "next-starter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start-dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "eslint": "standard",
+    "eslint-fix": "standard --fix",
+    "stylelint": "stylelint './src/**/*.jsx'",
+    "deploy": "",
+    "deploy-production": "BUILD_ENV=production npm run deploy",
+    "deploy-test": "BUILD_ENV=test npm run deploy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shianqi/next-starter.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shianqi/next-starter/issues"
+  },
+  "homepage": "https://github.com/shianqi/next-starter#readme",
+  "standard": {
+    "parser": "babel-eslint"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.4.3",
+    "lodash.merge": "^4.6.1",
+    "next": "^8.0.4",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "styled-components": "^4.2.0"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.4.0",
+    "babel-eslint": "^10.0.1",
+    "babel-plugin-styled-components": "^1.10.0",
+    "standard": "^12.0.1",
+    "stylelint": "^9.10.1",
+    "stylelint-config-standard": "^18.2.0",
+    "stylelint-config-styled-components": "^0.1.1",
+    "stylelint-processor-styled-components": "^1.6.0"
+  }
+}

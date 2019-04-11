@@ -1,0 +1,10 @@
+node_modules/
+package-lock.json
+.cache
+.next/
+.out/
+yarn-error.log
+yarn.lock
+out/
+.idea/
+*.DS_Store

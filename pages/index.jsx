@@ -6,4 +6,12 @@ const Title = styled.h1`
   font-size: 50px;
 `
 
-export default () => <Title>My page</Title>
+class App extends React.PureComponent {
+  state = {}
+
+  render () {
+    return <Title>hello world</Title>
+  }
+}
+
+export default App

@@ -1,21 +1,9 @@
-# Next 脚手架
+# Next Starter
 
-## 分支详情
+## master
 
-### master
-
-- React
-- Styled-Components
 - Next.js
-- Standard
-- Babel
-
-### with-redux
-
-- @master
+- React
 - Redux
-
-### with-material-ui
-
-- @master
-- Redux
+- Styled-Components
+- Material-UI

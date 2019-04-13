@@ -1,17 +1,39 @@
+import AppActions from 'REDUX/app/actions'
 import React from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import styled from 'styled-components'
 
-const Title = styled.h1`
-  color: red;
-  font-size: 50px;
+import Button from '@material-ui/core/Button'
+
+const StyledButton = styled(Button)`
+  font-size: 20px;
 `
 
 class App extends React.PureComponent {
   state = {}
 
   render () {
-    return <Title>hello world</Title>
+    const { actions } = this.props
+    actions.initApp()
+
+    return (
+      <StyledButton variant='contained' color='primary'>
+        Hello world
+      </StyledButton>
+    )
   }
 }
 
-export default App
+const mapStateToProps = state => {
+  return {}
+}
+
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators(AppActions, dispatch)
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App)

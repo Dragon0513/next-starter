@@ -5,27 +5,27 @@
     "allowSyntheticDefaultImports": true,
     "baseUrl": "./",
     "paths": {
-      // "API/*": [
-      //   "src/api/*"
-      // ],
-      // "COMPONENTS/*": [
-      //   "src/components/*"
-      // ],
-      // "CONTAINERS/*": [
-      //   "src/containers/*"
-      // ],
-      // "REDUX/*": [
-      //   "src/redux/*"
-      // ],
+      "API/*": [
+        "src/api/*"
+      ],
+      "COMPONENTS/*": [
+        "src/components/*"
+      ],
+      "CONTAINERS/*": [
+        "src/containers/*"
+      ],
+      "REDUX/*": [
+        "src/redux/*"
+      ],
       "ENV/*": [
         "env/*"
       ],
       "UTILS/*": [
         "src/utils/*"
       ],
-      // "RESOURCE/*": [
-      //   "src/resource/*"
-      // ]
+      "RESOURCE/*": [
+        "src/resource/*"
+      ]
     }
   },
   "exclude": [

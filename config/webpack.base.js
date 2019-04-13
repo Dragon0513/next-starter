@@ -2,11 +2,11 @@ const { resolve } = require('path')
 const { DefinePlugin } = require('webpack')
 
 const alias = {
-  // API: resolve(__dirname, '../src/api'),
-  // COMPONENTS: resolve(__dirname, '../src/components'),
-  // CONTAINERS: resolve(__dirname, '../src/containers'),
-  // REDUX: resolve(__dirname, '../src/redux'),
-  // RESOURCE: resolve(__dirname, '../src/resource'),
+  API: resolve(__dirname, '../src/api'),
+  COMPONENTS: resolve(__dirname, '../src/components'),
+  CONTAINERS: resolve(__dirname, '../src/containers'),
+  REDUX: resolve(__dirname, '../src/redux'),
+  RESOURCE: resolve(__dirname, '../src/resource'),
   ENV: resolve(__dirname, '../env'),
   UTILS: resolve(__dirname, '../src/utils')
 }

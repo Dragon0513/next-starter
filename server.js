@@ -1,7 +1,7 @@
 const Koa = require('koa')
 const next = require('next')
 const Router = require('koa-router')
-const env = require('env')
+const env = require('./env')
 
 const { port } = env
 const dev = process.env.NODE_ENV !== 'production'

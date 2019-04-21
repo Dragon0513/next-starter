@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "test": "jest src",
+    "test-watch": "jest src --watch",
     "build": "npm run clean && npm install && next build",
     "start-dev": "next",
     "start-server-test": "BUILD_ENV=test npm run build && NODE_ENV=production node ./server.js",
@@ -28,7 +30,10 @@
   },
   "homepage": "https://github.com/shianqi/next-starter#readme",
   "standard": {
-    "parser": "babel-eslint"
+    "parser": "babel-eslint",
+    "envs": [
+      "jest"
+    ]
   },
   "dependencies": {
     "@babel/polyfill": "^7.4.3",
@@ -48,6 +53,7 @@
     "@babel/plugin-proposal-class-properties": "^7.4.0",
     "babel-eslint": "^10.0.1",
     "babel-plugin-styled-components": "^1.10.0",
+    "jest": "^24.7.1",
     "redux-logger": "^3.0.6",
     "standard": "^12.0.1",
     "stylelint": "^9.10.1",

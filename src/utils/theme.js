@@ -203,7 +203,7 @@ export const not = (...keys) => value => props => {
       return ''
     }
   }
-  return value
+  return typeof value === 'function' ? value(props) : value
 }
 
 export const check = (...keys) => value => props => {
@@ -215,6 +215,9 @@ export const check = (...keys) => value => props => {
   return ''
 }
 
-export const checkBy = (property, mapping) => props => mapping[props[property]]
+export const checkBy = (property, mapping) => props => {
+  const value = mapping[props[property]]
+  return typeof value === 'function' ? value(props) : value
+}
 
 export default theme

@@ -1,10 +1,6 @@
 import React, { PureComponent } from 'react'
 import styled from 'styled-components'
 
-const requireAll = requireContext => requireContext.keys().map(requireContext)
-const req = require.context('RESOURCE/icon', true, /\.svg$/)
-requireAll(req)
-
 const SVG = styled(({ width, height, ...other }) => <svg {...other} />)`
   width: ${props => props.width || '1em'};
   height: ${props => props.height || '1em'};

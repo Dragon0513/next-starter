@@ -11,10 +11,10 @@ const alias = {
   UTILS: resolve(__dirname, '../src/utils')
 }
 
-// const svgLoader = {
-//   test: /\.svg$/,
-//   use: [{ loader: 'svg-sprite-loader', options: {} }, 'svgo-loader']
-// }
+const svgLoader = {
+  test: /\.svg$/,
+  use: [{ loader: 'svg-sprite-loader', options: {} }, 'svgo-loader']
+}
 
 const cssLoader = {
   test: /\.css$/,
@@ -27,7 +27,7 @@ const plugins = [
   })
 ]
 
-const loaders = [cssLoader]
+const loaders = [cssLoader, svgLoader]
 
 module.exports = {
   alias,

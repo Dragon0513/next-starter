@@ -1,5 +1,6 @@
+import Icon from 'COMPONENTS/base/Icon'
 import AppActions from 'REDUX/app/actions'
-import React from 'react'
+import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import styled from 'styled-components'
@@ -13,14 +14,19 @@ const StyledButton = styled(Button)`
 class App extends React.PureComponent {
   state = {}
 
-  render () {
+  componentDidMount () {
     const { actions } = this.props
     actions.initApp()
+  }
 
+  render () {
     return (
-      <StyledButton variant='contained' color='primary'>
-        Hello world
-      </StyledButton>
+      <Fragment>
+        <StyledButton variant='contained' color='primary'>
+          Hello world
+        </StyledButton>
+        <Icon name='success' />
+      </Fragment>
     )
   }
 }

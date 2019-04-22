@@ -4,6 +4,13 @@ import Document, { Head, Main, NextScript } from 'next/document'
 import React from 'react'
 import { ServerStyleSheet } from 'styled-components'
 import flush from 'styled-jsx/server'
+import sprite from 'svg-sprite-loader/runtime/sprite.build'
+
+const requireAll = requireContext => requireContext.keys().map(requireContext)
+const req = require.context('RESOURCE/icon', true, /\.svg$/)
+requireAll(req)
+
+const spriteContent = sprite.stringify()
 
 export default class MyDocument extends Document {
   render () {
@@ -27,6 +34,7 @@ export default class MyDocument extends Document {
           {this.props.styleTags}
         </Head>
         <body>
+          <div dangerouslySetInnerHTML={{ __html: spriteContent }} />
           <Main />
           <NextScript />
         </body>
@@ -65,8 +73,6 @@ export default class MyDocument extends Document {
           </>
         )
       }
-    } catch (e) {
-      console.log(e)
     } finally {
       sheet.seal()
     }

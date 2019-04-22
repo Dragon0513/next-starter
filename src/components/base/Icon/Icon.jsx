@@ -6,8 +6,9 @@ const req = require.context('RESOURCE/icon', true, /\.svg$/)
 requireAll(req)
 
 const SVG = styled(({ width, height, ...other }) => <svg {...other} />)`
-  width: ${props => (props.width ? props.width : '1em')};
-  height: ${props => (props.height ? props.height : '1em')};
+  width: ${props => props.width || '1em'};
+  height: ${props => props.height || '1em'};
+  margin: ${props => props.m || 0};
   vertical-align: -0.15em;
   fill: currentColor;
   overflow: hidden;
@@ -15,15 +16,9 @@ const SVG = styled(({ width, height, ...other }) => <svg {...other} />)`
 
 class Icon extends PureComponent {
   render () {
-    const { name, width, height, className, onClick } = this.props
+    const { name, width, height, m, ...props } = this.props
     return (
-      <SVG
-        width={width}
-        height={height}
-        className={className}
-        onClick={onClick}
-        aria-hidden='true'
-      >
+      <SVG width={width} height={height} m={m} aria-hidden='true' {...props}>
         <use xlinkHref={`#${name}`} />
       </SVG>
     )

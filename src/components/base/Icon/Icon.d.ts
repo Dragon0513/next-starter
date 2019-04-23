@@ -4,7 +4,8 @@ export interface IconProps {
   name: string,
   width?: string,
   height?: string,
-  m?: function,
+  color?: string,
+  m?: string
 }
 
 declare const Icon: React.ComponentType<IconProps>

@@ -1,5 +1,6 @@
 import Icon from 'COMPONENTS/base/Icon'
 import AppActions from 'REDUX/app/actions'
+import { palettePrimaryMain } from 'UTILS/theme'
 import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -25,7 +26,7 @@ class App extends React.PureComponent {
         <StyledButton variant='contained' color='primary'>
           Hello world
         </StyledButton>
-        <Icon name='success' />
+        <Icon name='success' m='0 0 0 8px' color={palettePrimaryMain()} />
       </Fragment>
     )
   }

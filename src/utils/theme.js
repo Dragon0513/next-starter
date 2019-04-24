@@ -182,6 +182,7 @@ export const paletteActionBackgroundColor = () =>
 export const paletteBorderColor = () => theme.palette.border.main
 
 export const breakpointsDown = theme.breakpoints.down
+export const breakpointsValues = theme.breakpoints.values
 
 export const transitionsCreate = (...args) => () =>
   theme.transitions.create(...args)

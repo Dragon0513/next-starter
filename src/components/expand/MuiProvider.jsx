@@ -1,4 +1,3 @@
-import getPageContext from 'UTILS/getPageContext'
 import { create } from 'jss'
 import React from 'react'
 import JssProvider from 'react-jss/lib/JssProvider'
@@ -13,8 +12,6 @@ const jss = create({
     : null
 })
 
-export const pageContext = getPageContext()
-
 class MuiProvider extends React.PureComponent {
   componentDidMount () {
     // Remove the server-side injected CSS.
@@ -25,7 +22,7 @@ class MuiProvider extends React.PureComponent {
   }
 
   render () {
-    const { children } = this.props
+    const { children, pageContext } = this.props
 
     return (
       <JssProvider

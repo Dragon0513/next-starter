@@ -44,28 +44,29 @@ export default class MyDocument extends Document {
 
   static async getInitialProps (ctx) {
     const sheet = new ServerStyleSheet()
-    const originalRenderPage = ctx.renderPage
     let pageContext
 
     try {
-      ctx.renderPage = () =>
-        originalRenderPage(App => props => {
-          pageContext = props.pageContext
-          return sheet.collectStyles(<App {...props} />)
-        })
+      const page = ctx.renderPage(App => props => {
+        pageContext = props.pageContext
+        return sheet.collectStyles(<App {...props} />)
+      })
 
       const initialProps = await Document.getInitialProps(ctx)
 
-      return {
-        ...initialProps,
+      let css
+      if (pageContext) {
+        css = pageContext.sheetsRegistry.toString()
+      }
 
+      return {
+        ...page,
+        pageContext,
         styles: (
           <>
             <style
               id='jss-server-side'
-              dangerouslySetInnerHTML={{
-                __html: pageContext.sheetsRegistry.toString()
-              }}
+              dangerouslySetInnerHTML={{ __html: css }}
             />
             {flush() || null}
             {initialProps.styles}

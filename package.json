@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest src",
     "test-watch": "jest src --watch",
-    "build": "npm run clean && npm install && next build",
+    "build": "npm run clean && next build",
     "start-dev": "next",
     "start-server-test": "BUILD_ENV=test npm run build && NODE_ENV=production node ./server.js",
     "start-server-production": "BUILD_ENV=production npm run build && NODE_ENV=production node ./server.js",
@@ -14,8 +14,8 @@
     "eslint": "standard",
     "eslint-fix": "standard --fix",
     "stylelint": "stylelint './src/**/*.jsx'",
-    "deploy": "npm run build && npm run export",
-    "deploy-production": "BUILD_ENV=production npm run deploy",
+    "deploy": "npm run build && next export",
+    "deploy-production": "npm install && NODE_ENV=production BUILD_ENV=production npm run deploy",
     "deploy-test": "BUILD_ENV=test npm run deploy"
   },
   "repository": {

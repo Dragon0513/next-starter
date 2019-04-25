@@ -1,6 +1,6 @@
-// import GlobalStyle from 'COMPONENTS/expand/GlobalStyle'
-import MuiProvider, { pageContext } from 'COMPONENTS/expand/MuiProvider'
+import MuiProvider from 'COMPONENTS/expand/MuiProvider'
 import configureStore from 'REDUX/store'
+import getPageContext from 'UTILS/getPageContext'
 import App, { Container } from 'next/app'
 import Head from 'next/head'
 import { Fragment } from 'react'
@@ -10,6 +10,8 @@ import { ThemeProvider } from 'styled-components'
 const store = configureStore()
 
 class MyApp extends App {
+  pageContext = getPageContext()
+
   render () {
     const { Component, pageProps } = this.props
     return (
@@ -18,13 +20,14 @@ class MyApp extends App {
           <title>next-starter</title>
         </Head>
 
-        <MuiProvider>
+        <MuiProvider pageContext={this.pageContext}>
+          {/* <CssBaseline /> */}
           {/* <Normalize /> */}
           {/* <GlobalStyle /> */}
-          <ThemeProvider theme={pageContext.theme}>
+          <ThemeProvider theme={this.pageContext.theme}>
             <Provider store={store}>
               <Fragment>
-                <Component pageContext={pageContext} {...pageProps} />
+                <Component pageContext={this.pageContext} {...pageProps} />
               </Fragment>
             </Provider>
           </ThemeProvider>

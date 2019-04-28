@@ -31,6 +31,21 @@ it('', () => {
 })
 
 it('', () => {
+  const res = formatUrl('/', {
+    target: 'inner',
+    staticSuffix: '',
+    host: 'www.shianqi.com'
+  })
+
+  expect(res).toEqual({
+    nextHref: '/',
+    nextAs: '/',
+    aHref: '/',
+    next: true
+  })
+})
+
+it('', () => {
   const res = formatUrl(null, {
     target: 'inner',
     staticSuffix: '.html',

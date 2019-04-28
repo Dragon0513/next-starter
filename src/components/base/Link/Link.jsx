@@ -17,7 +17,6 @@ const StyledLink = styled(({ color, decoration, ...other }) => (
   `)}
 `
 
-// TODO:  测试覆盖, href === '/'
 function Link (props) {
   const {
     className,
@@ -31,7 +30,7 @@ function Link (props) {
 
   const res = formatUrl(href, {
     host,
-    exportTarget,
+    target: exportTarget,
     staticSuffix
   })
 

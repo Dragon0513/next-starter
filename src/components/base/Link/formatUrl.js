@@ -25,7 +25,9 @@ const formatUrl = (href, { target, staticSuffix, host }) => {
   res.nextHref = pathname
 
   if (res.nextHref.match(/\/$/)) {
-    res.nextAs = `${res.nextHref}index${staticSuffix}${query}`
+    res.nextAs = `${res.nextHref}${
+      staticSuffix === '' ? '' : `index${staticSuffix}`
+    }${query}`
     res.aHref = res.nextAs
   } else {
     res.nextAs = `${res.nextHref}${staticSuffix}${query}`

@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest src",
-    "test-watch": "jest src --watch",
+    "test": "jest src --coverage",
+    "test-watch": "jest src --watch --coverage",
     "build": "npm run clean && next build",
     "start-dev": "next",
     "start-server-test": "BUILD_ENV=test npm run build && NODE_ENV=production node ./server.js",
@@ -47,7 +47,8 @@
     "redux": "^4.0.1",
     "redux-actions": "^2.6.5",
     "redux-thunk": "^2.3.0",
-    "styled-components": "^4.2.0"
+    "styled-components": "^4.2.0",
+    "url-parse": "^1.4.7"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.4.0",

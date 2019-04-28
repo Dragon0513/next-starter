@@ -1,11 +1,12 @@
+import env from 'ENV'
+import { not } from 'UTILS/theme'
+import NextLink from 'next/link'
 import React from 'react'
 import styled from 'styled-components'
-import NextLink from 'next/link'
-import env from 'ENV'
-import parse from 'url-parse'
-import { not } from 'UTILS/theme'
 
-const { host, target: exportTarget } = env
+import formatUrl from './formatUrl'
+
+const { host, target: exportTarget, staticSuffix } = env
 
 const StyledLink = styled(({ color, decoration, ...other }) => (
   <a {...other} />
@@ -16,56 +17,30 @@ const StyledLink = styled(({ color, decoration, ...other }) => (
   `)}
 `
 
+// TODO:  测试覆盖, href === '/'
 function Link (props) {
-  const { className, href, children, decoration, color, target, ...other } = props
+  const {
+    className,
+    href,
+    children,
+    decoration,
+    color,
+    target,
+    ...other
+  } = props
 
-  let unifyHref = href || '/'
-  let res = {
-    nextHref: '',
-    nextAs: '',
-    aHref: ''
-  }
+  const res = formatUrl(href, {
+    host,
+    exportTarget,
+    staticSuffix
+  })
 
-  if (href && href.pathname) {
-    unifyHref = href.pathname
-  }
-
-  // 站外链接
-  if (!unifyHref.match(/^\/[^/]/)) {
+  if (!res.next) {
     return (
       <StyledLink
         target={target}
         color={color}
-        href={unifyHref}
-        decoration={decoration}
-        className={className}
-      >
-        {children}
-      </StyledLink>
-    )
-  }
-
-  const url = parse(unifyHref)
-  const { pathname, query } = url
-  res.nextHref = pathname
-
-  if (res.nextHref.match(/\/$/)) {
-    res.nextAs = `${res.nextHref}index.html${query}`
-    res.aHref = res.nextAs
-  } else {
-    res.nextAs = `${res.nextHref}.html${query}`
-    res.aHref = res.nextAs
-  }
-
-  // 代码导出绝对链接
-  if (exportTarget !== 'inner') {
-    const absoluteHref = `//${host}${res.aHref}`
-
-    return (
-      <StyledLink
-        target={target}
-        color={color}
-        href={absoluteHref}
+        href={res.aHref}
         decoration={decoration}
         className={className}
       >
@@ -75,11 +50,7 @@ function Link (props) {
   }
 
   return (
-    <NextLink
-      href={res.nextHref}
-      as={res.nextAs}
-      {...other}
-    >
+    <NextLink href={res.nextHref} as={res.nextAs} {...other}>
       <StyledLink
         target={target}
         color={color}

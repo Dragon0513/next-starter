@@ -8,3 +8,4 @@ yarn.lock
 out/
 .idea/
 *.DS_Store
+coverage/

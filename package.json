@@ -1,6 +1,6 @@
 {
   "name": "next-starter",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -39,6 +39,7 @@
     "@babel/polyfill": "^7.4.3",
     "@material-ui/core": "^3.9.3",
     "lodash": "^4.17.11",
+    "moment": "^2.24.0",
     "next": "^8.0.4",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",

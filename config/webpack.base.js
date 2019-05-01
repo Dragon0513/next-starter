@@ -23,7 +23,14 @@ const cssLoader = {
 
 const plugins = [
   new DefinePlugin({
-    'process.env.BUILD_ENV': JSON.stringify(process.env.BUILD_ENV)
+    'process.env.BUILD_ENV': JSON.stringify(process.env.BUILD_ENV),
+    'process.env.npm_package_version': JSON.stringify(
+      process.env.npm_package_version
+    ),
+    'process.env.BUILD_TIME': JSON.stringify(new Date()),
+    'process.env.npm_package_gitHead': JSON.stringify(
+      process.env.npm_package_gitHead
+    )
   })
 ]
 

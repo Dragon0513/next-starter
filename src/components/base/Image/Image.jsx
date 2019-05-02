@@ -1,5 +1,5 @@
-import { breakpointsDown } from 'UTILS/theme'
 import React from 'react'
+import { breakpointsDown } from 'UTILS/theme'
 import styled from 'styled-components'
 
 const Banner = styled(({ color, ...props }) => <div {...props} />)`
@@ -27,27 +27,21 @@ const VerticalImage = styled.img`
 
 const p = key => props => props[key]
 
+// prettier-ignore
 const Gradient = styled(({ color, width, ...props }) => <div {...props} />)`
   position: absolute;
   width: ${p('width')};
   height: 100%;
   top: 0;
   left: 0;
-  background-image: linear-gradient(
-    to right,
-    ${p('color')} 0%,
-    rgba(0, 0, 0, 0) 100%
-  );
+  background-image: linear-gradient(to right, ${p('color')} 0%, rgba(0, 0, 0, 0) 100%);
 `
 
+// prettier-ignore
 const GradientRight = styled(Gradient)`
   left: unset;
   right: 0;
-  background-image: linear-gradient(
-    to left,
-    ${p('color')} 0%,
-    rgba(0, 0, 0, 0) 100%
-  );
+  background-image: linear-gradient(to left, ${p('color')} 0%, rgba(0, 0, 0, 0) 100%);
 `
 
 function Image (props) {

@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+
 import styled from 'styled-components'
 
 const SVG = styled(({ width, height, m, color, ...other }) => (

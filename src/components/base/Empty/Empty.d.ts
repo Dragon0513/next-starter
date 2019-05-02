@@ -1,8 +1,8 @@
 import * as React from 'react'
-import { StandardProps } from '@material-ui/core';
+import { StandardProps } from '@material-ui/core'
 
 export interface EmptyProps {
-  width?: string,
+  width?: string
   height?: string
 }
 

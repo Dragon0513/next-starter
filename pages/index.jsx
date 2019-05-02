@@ -1,14 +1,14 @@
+import React, { Fragment } from 'react'
+
+import AppActions from 'REDUX/app/actions'
+import Button from '@material-ui/core/Button'
 import Empty from 'COMPONENTS/base/Empty'
 import Icon from 'COMPONENTS/base/Icon'
 import Image from 'COMPONENTS/base/Image'
-import AppActions from 'REDUX/app/actions'
-import { palettePrimaryMain } from 'UTILS/theme'
-import React, { Fragment } from 'react'
-import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { palettePrimaryMain } from 'UTILS/theme'
 import styled from 'styled-components'
-
-import Button from '@material-ui/core/Button'
 
 const StyledButton = styled(Button)`
   font-size: 20px;

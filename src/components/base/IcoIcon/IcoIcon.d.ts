@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 export interface IcoIconProps {
-  href: string,
+  href: string
 }
 
 declare const IcoIcon: React.ComponentType<IcoIconProps>

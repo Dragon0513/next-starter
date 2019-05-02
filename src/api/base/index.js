@@ -1,6 +1,6 @@
+import axios from 'axios'
 import config from 'ENV'
 import configureStore from 'REDUX/store'
-import axios from 'axios'
 
 axios.defaults.withCredentials = true
 

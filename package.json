@@ -29,6 +29,18 @@
     "url": "https://github.com/shianqi/next-starter/issues"
   },
   "homepage": "https://github.com/shianqi/next-starter#readme",
+  "importSort": {
+    ".js, .jsx, .es6, .es": {
+      "parser": "babylon",
+      "style": "module-scoped",
+      "options": {}
+    },
+    ".ts, .tsx": {
+      "parser": "typescript",
+      "style": "module-scoped",
+      "options": {}
+    }
+  },
   "dependencies": {
     "@babel/polyfill": "^7.4.3",
     "@material-ui/core": "^3.9.3",
@@ -57,7 +69,7 @@
     "eslint-plugin-import": "^2.17.2",
     "eslint-plugin-node": "^8.0.1",
     "eslint-plugin-promise": "^4.1.1",
-    "eslint-plugin-react": "^7.12.4",
+    "eslint-plugin-react": "^7.13.0",
     "eslint-plugin-standard": "^4.0.0",
     "jest": "^24.7.1",
     "redux-logger": "^3.0.6",

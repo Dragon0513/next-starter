@@ -1,10 +1,9 @@
-import Document, { Head, Main, NextScript } from 'next/document'
-
 import IcoIcon from 'COMPONENTS/base/IcoIcon'
+import { palettePrimaryMain } from 'UTILS/theme'
+import Document, { Head, Main, NextScript } from 'next/document'
 import React from 'react'
 import { ServerStyleSheet } from 'styled-components'
 import flush from 'styled-jsx/server'
-import { palettePrimaryMain } from 'UTILS/theme'
 import sprite from 'svg-sprite-loader/runtime/sprite.build'
 
 const requireAll = requireContext => requireContext.keys().map(requireContext)

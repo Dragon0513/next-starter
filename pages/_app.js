@@ -1,12 +1,11 @@
-import App, { Container } from 'next/app'
-import React, { Fragment } from 'react'
-
-import Head from 'next/head'
 import MuiProvider from 'COMPONENTS/expand/MuiProvider'
-import { Provider } from 'react-redux'
-import { ThemeProvider } from 'styled-components'
 import configureStore from 'REDUX/store'
 import getPageContext from 'UTILS/getPageContext'
+import App, { Container } from 'next/app'
+import Head from 'next/head'
+import React, { Fragment } from 'react'
+import { Provider } from 'react-redux'
+import { ThemeProvider } from 'styled-components'
 
 const store = configureStore()
 

@@ -1,16 +1,7 @@
-import { create } from 'jss'
 import React from 'react'
-import JssProvider from 'react-jss/lib/JssProvider'
 
-import CssBaseline from '@material-ui/core/CssBaseline'
-import { MuiThemeProvider, jssPreset } from '@material-ui/core/styles'
-
-const jss = create({
-  ...jssPreset(),
-  insertionPoint: process.browser
-    ? document.getElementById('jss-insertion-point-app')
-    : null
-})
+import { ThemeProvider, StylesProvider } from '@material-ui/styles'
+import theme from 'UTILS/theme'
 
 class MuiProvider extends React.PureComponent {
   componentDidMount () {
@@ -22,22 +13,12 @@ class MuiProvider extends React.PureComponent {
   }
 
   render () {
-    const { children, pageContext } = this.props
+    const { children } = this.props
 
     return (
-      <JssProvider
-        registry={pageContext.sheetsRegistry}
-        generateClassName={pageContext.generateClassName}
-        jss={jss}
-      >
-        <MuiThemeProvider
-          theme={pageContext.theme}
-          sheetsManager={pageContext.sheetsManager}
-        >
-          <CssBaseline />
-          {children}
-        </MuiThemeProvider>
-      </JssProvider>
+      <StylesProvider injectFirst>
+        <ThemeProvider theme={theme}>{children}</ThemeProvider>
+      </StylesProvider>
     )
   }
 }

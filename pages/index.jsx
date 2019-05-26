@@ -11,7 +11,7 @@ import styled from 'styled-components'
 import Button from '@material-ui/core/Button'
 
 const StyledButton = styled(Button)`
-  font-size: 20px;
+  font-size: 50px;
 `
 
 class App extends React.PureComponent {

@@ -1,17 +1,16 @@
 import MuiProvider from 'COMPONENTS/expand/MuiProvider'
 import configureStore from 'REDUX/store'
-import getPageContext from 'UTILS/getPageContext'
 import App, { Container } from 'next/app'
 import Head from 'next/head'
 import React, { Fragment } from 'react'
 import { Provider } from 'react-redux'
+import CssBaseline from '@material-ui/core/CssBaseline'
 import { ThemeProvider } from 'styled-components'
+import theme from 'UTILS/theme'
 
 const store = configureStore()
 
 class MyApp extends App {
-  pageContext = getPageContext()
-
   render () {
     const { Component, pageProps } = this.props
     return (
@@ -20,14 +19,14 @@ class MyApp extends App {
           <title>next-starter</title>
         </Head>
 
-        <MuiProvider pageContext={this.pageContext}>
-          {/* <CssBaseline /> */}
+        <MuiProvider>
+          <CssBaseline />
           {/* <Normalize /> */}
           {/* <GlobalStyle /> */}
-          <ThemeProvider theme={this.pageContext.theme}>
+          <ThemeProvider theme={theme}>
             <Provider store={store}>
               <Fragment>
-                <Component pageContext={this.pageContext} {...pageProps} />
+                <Component {...pageProps} />
               </Fragment>
             </Provider>
           </ThemeProvider>

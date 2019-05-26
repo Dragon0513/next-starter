@@ -2,8 +2,9 @@ import IcoIcon from 'COMPONENTS/base/IcoIcon'
 import { palettePrimaryMain } from 'UTILS/theme'
 import Document, { Head, Main, NextScript } from 'next/document'
 import React from 'react'
-import { ServerStyleSheet } from 'styled-components'
+import { ServerStyleSheet as StyledServerStyleSheet } from 'styled-components'
 import flush from 'styled-jsx/server'
+import { ServerStyleSheets } from '@material-ui/styles'
 import sprite from 'svg-sprite-loader/runtime/sprite.build'
 
 const requireAll = requireContext => requireContext.keys().map(requireContext)
@@ -12,7 +13,7 @@ requireAll(req)
 
 const spriteContent = sprite.stringify()
 
-export default class MyDocument extends Document {
+class MyDocument extends Document {
   render () {
     return (
       <html lang='zh-CN' dir='ltr'>
@@ -29,9 +30,6 @@ export default class MyDocument extends Document {
           <meta httpEquiv='Cache-Control' content='no-cache' />
           <meta httpEquiv='expires' content='0' />
           <meta name='theme-color' content={palettePrimaryMain()} />
-
-          <noscript id='jss-insertion-point-app' />
-          {this.props.styleTags}
         </Head>
         <body>
           <div dangerouslySetInnerHTML={{ __html: spriteContent }} />
@@ -43,39 +41,36 @@ export default class MyDocument extends Document {
   }
 
   static async getInitialProps (ctx) {
-    const sheet = new ServerStyleSheet()
-    let pageContext
+    const styledSheet = new StyledServerStyleSheet()
+    const sheets = new ServerStyleSheets()
+    const originalRenderPage = ctx.renderPage
 
     try {
-      const page = ctx.renderPage(App => props => {
-        pageContext = props.pageContext
-        return sheet.collectStyles(<App {...props} />)
-      })
+      ctx.renderPage = () =>
+        originalRenderPage({
+          enhanceApp: App => props => sheets.collect(<App {...props} />)
+        })
 
       const initialProps = await Document.getInitialProps(ctx)
 
-      let css
-      if (pageContext) {
-        css = pageContext.sheetsRegistry.toString()
-      }
-
       return {
-        ...page,
-        pageContext,
+        ...initialProps,
+        // Styles fragment is rendered after the app and page rendering finish.
         styles: (
-          <>
-            <style
-              id='jss-server-side'
-              dangerouslySetInnerHTML={{ __html: css }}
-            />
+          <React.Fragment>
+            {sheets.getStyleElement()}
             {flush() || null}
-            {initialProps.styles}
-            {sheet.getStyleElement()}
-          </>
+            {styledSheet.getStyleElement()}
+          </React.Fragment>
         )
       }
+      /* eslint-enable */
+    } catch (err) {
+      console.error(err)
     } finally {
-      sheet.seal()
+      styledSheet.seal()
     }
   }
 }
+
+export default MyDocument

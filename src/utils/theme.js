@@ -187,7 +187,7 @@ export const breakpointsValues = theme.breakpoints.values
 export const transitionsCreate = (...args) => () =>
   theme.transitions.create(...args)
 
-export const spacingUnit = size => () => theme.spacing.unit * size
+export const spacingUnit = theme.spacing
 export const typographyFontSize = () => theme.typography.fontSize
 export const typographyH6FontSize = () => theme.typography.h6.fontSize
 export const typographyH6LineHeight = () => theme.typography.h6.lineHeight

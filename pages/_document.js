@@ -4,7 +4,7 @@ import Document, { Head, Main, NextScript } from 'next/document'
 import React from 'react'
 import { ServerStyleSheet as StyledServerStyleSheet } from 'styled-components'
 import flush from 'styled-jsx/server'
-import { ServerStyleSheets } from '@material-ui/styles'
+import { ServerStyleSheets as MuiServerStyleSheet } from '@material-ui/styles'
 import sprite from 'svg-sprite-loader/runtime/sprite.build'
 
 const requireAll = requireContext => requireContext.keys().map(requireContext)
@@ -42,7 +42,7 @@ class MyDocument extends Document {
 
   static async getInitialProps (ctx) {
     const styledSheet = new StyledServerStyleSheet()
-    const sheets = new ServerStyleSheets()
+    const sheets = new MuiServerStyleSheet()
     const originalRenderPage = ctx.renderPage
 
     try {

@@ -1,11 +1,12 @@
 const { alias, loaders, plugins } = require('./config/webpack.base')
 const env = require('./env')
+const withTypescript = require('@zeit/next-typescript')
 
 const { staticSuffix } = env
 
 const routers = ['/index']
 
-module.exports = {
+module.exports = withTypescript({
   webpack: (config, { buildId, dev, isServer, defaultLoaders }) => {
     // Perform customizations to webpack config
     // Important: return the modified config
@@ -59,4 +60,4 @@ module.exports = {
       }
     }, {})
   }
-}
+})

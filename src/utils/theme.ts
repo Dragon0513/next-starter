@@ -2,6 +2,7 @@ import _ from 'lodash'
 import { css } from 'styled-components'
 
 import { createMuiTheme } from '@material-ui/core/styles'
+import { ThemeOptions } from '@material-ui/core/styles/createMuiTheme'
 
 const myTypographyFontFamily = {
   100: `"PingFangSC-Ultralight", "Helvetica Neue", Helvetica, Arial,  "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;`,
@@ -12,7 +13,7 @@ const myTypographyFontFamily = {
   900: `"PingFangSC-Semibold", "Helvetica Neue", Helvetica, Arial,  "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;`
 }
 
-const defaultTheme = {
+const defaultTheme: ThemeOptions = {
   palette: {
     type: 'light',
     primary: {
@@ -33,9 +34,6 @@ const defaultTheme = {
     error: {
       main: '#D94F43'
     },
-    warning: {
-      main: '#FFBD2A'
-    },
     tonalOffset: 0.05,
     action: {
       active: 'rgba(0, 0, 0, 0.54)',
@@ -44,9 +42,6 @@ const defaultTheme = {
       selected: 'rgba(0, 0, 0, 0.14)',
       disabled: 'rgba(0, 0, 0, 0.26)',
       disabledBackground: 'rgba(0, 0, 0, 0.12)'
-    },
-    border: {
-      main: 'rgba(232, 236, 243, 1)'
     }
   },
   mixins: {
@@ -61,7 +56,6 @@ const defaultTheme = {
     }
   },
   typography: {
-    useNextVariants: true,
     fontFamily: `"PingFangSC", "Helvetica Neue", Helvetica, Arial,  "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;`,
     h1: {
       fontSize: '2.375rem', // 38px
@@ -114,7 +108,7 @@ const defaultTheme = {
   }
 }
 
-export const getTheme = (newTheme = {}) =>
+export const getTheme = (newTheme?: ThemeOptions) =>
   createMuiTheme(_.merge(defaultTheme, newTheme))
 
 // https://material-ui.com/customization/default-theme/
@@ -174,18 +168,16 @@ export const paletteTextPrimary = () => theme.palette.text.primary
 export const paletteTextSecondary = () => theme.palette.text.secondary
 export const paletteTextDisabled = () => theme.palette.text.disabled
 export const paletteErrorMain = () => theme.palette.error.main
-export const paletteWarningMain = () => theme.palette.warning.main
 export const paletteErrorLight = () => theme.palette.error.light
 
 export const paletteActionBackgroundColor = () =>
   theme.palette.action.disabledBackground
-export const paletteBorderColor = () => theme.palette.border.main
+export const paletteDividerColor = () => theme.palette.divider
 
 export const breakpointsDown = theme.breakpoints.down
 export const breakpointsValues = theme.breakpoints.values
 
-export const transitionsCreate = (...args) => () =>
-  theme.transitions.create(...args)
+export const transitionsCreate = () => theme.transitions.create
 
 export const spacingUnit = theme.spacing
 export const typographyFontSize = () => theme.typography.fontSize
@@ -198,7 +190,9 @@ export const typographyButtonLineHeight = () =>
 export const shapeBorderRadius = () => theme.shape.borderRadius
 
 // styled-components 工具
-export const not = (...keys) => value => props => {
+export const not = (...keys: string[]) => (
+  value: Function | string
+) => (props: {}) => {
   for (const key of keys) {
     if (props[key]) {
       return ''
@@ -207,7 +201,9 @@ export const not = (...keys) => value => props => {
   return typeof value === 'function' ? value(props) : value
 }
 
-export const check = (...keys) => value => props => {
+export const check = (...keys: string[]) => (
+  value: Function | string
+) => (props: {}) => {
   for (const key of keys) {
     if (props[key]) {
       return typeof value === 'function' ? value(props) : value
@@ -216,7 +212,7 @@ export const check = (...keys) => value => props => {
   return ''
 }
 
-export const checkBy = (property, mapping) => props => {
+export const checkBy = (property: string, mapping: {}) => (props: {}) => {
   const value = mapping[props[property]]
   return typeof value === 'function' ? value(props) : value
 }

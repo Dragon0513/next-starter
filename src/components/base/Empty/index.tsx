@@ -1,4 +1,3 @@
-import { breakpointsDown } from 'UTILS/theme'
 import React from 'react'
 import styled from 'styled-components'
 

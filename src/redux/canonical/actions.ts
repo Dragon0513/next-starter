@@ -1,4 +1,5 @@
 import { createActions } from 'redux-actions'
+import { Dispatch } from 'redux'
 
 const { fetchData, receiveData } = createActions('FETCH_DATA', 'RECEIVE_DATA')
 
@@ -21,13 +22,21 @@ const shouldFetch = (state, config) => {
 
 export const defaultFormate = data => data
 
-export const tryToFetch = ({
+interface TryToFetchDto {
+  location: string
+  key: string
+  fetchFunc: () => void
+  formate: () => any
+  ttl: number
+}
+
+export const tryToFetch: (options: TryToFetchDto) => void = ({
   location,
   key,
   fetchFunc,
   formate = defaultFormate,
   ttl = 0
-}) => async (dispatch, getState) => {
+}) => async (dispatch: Dispatch, getState) => {
   const state = getState()
   const data = state[location][key]
 

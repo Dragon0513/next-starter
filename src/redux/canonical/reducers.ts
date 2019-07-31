@@ -20,8 +20,8 @@ const canonical = handleActions({
       ...state,
       [location]: {
         ...state[location],
-        [key]: {
-          ...state[location][key],
+        [key]: state[location][key],
+        [`${key}Loading`]: {
           loading: true,
           loadingTime: new Date().valueOf()
         }
@@ -36,10 +36,10 @@ const canonical = handleActions({
       ...state,
       [location]: {
         ...state[location],
-        [key]: {
-          ...state[location][key],
+        [key]: data,
+        [`${key}Loading`]: {
+          ...state[location][`${key}Loading`],
           loading: false,
-          data,
           updateTime: new Date().valueOf()
         }
       }

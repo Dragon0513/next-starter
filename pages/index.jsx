@@ -20,6 +20,7 @@ class App extends React.PureComponent {
   componentDidMount () {
     const { actions } = this.props
     actions.initApp()
+    actions.tryToFetchLocationsConfig()
   }
 
   render () {

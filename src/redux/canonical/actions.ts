@@ -26,11 +26,12 @@ interface TryToFetchDto {
   location: string
   key: string
   fetchFunc: () => void
-  formate: () => any
-  ttl: number
+  formate?: () => any
+  ttl?: number
 }
 
-export const tryToFetch: (options: TryToFetchDto) => void = ({
+// TODO:
+export const tryToFetch: (options: TryToFetchDto) => any = ({
   location,
   key,
   fetchFunc,

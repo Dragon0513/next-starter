@@ -7,7 +7,7 @@ const initialState = {
 const appReducers = handleActions(
   {
     INIT_APP: (state, action) => {
-      return {}
+      return state
     }
   },
   initialState

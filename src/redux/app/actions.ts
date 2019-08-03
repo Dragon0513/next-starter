@@ -8,15 +8,16 @@ const { initApp } = createActions('INIT_APP')
 const getDate = () => new Promise((resolve, reject) => {
   setTimeout(() => {
     resolve({ name: 'redux' })
-  }, 10000)
+  }, 1000)
 })
 
 const tryToFetchLocationsConfig: () => ThunkAction<void, RootStateTypes, void, any> = () => (dispatch) => {
-  dispatch(
+  return dispatch(
     tryToFetch({
       location: 'app',
       key: 'locationsConfig',
-      fetchFunc: getDate
+      fetchFunc: getDate,
+      ttl: 10000
     })
   )
 }

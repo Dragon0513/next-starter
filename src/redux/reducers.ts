@@ -6,7 +6,7 @@ import canonical from './canonical/reducers'
 
 export default (state: RootStateTypes, action: any) => {
   return compose(
-    (inState: any) => canonical(inState, action),
+    (inState: RootStateTypes) => canonical(inState, action),
     combineReducers({
       app
     })

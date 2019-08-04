@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware } from 'redux'
+import { createStore, applyMiddleware, Store, AnyAction } from 'redux'
 
 import thunk from 'redux-thunk'
 import { createLogger } from 'redux-logger'
@@ -13,17 +13,20 @@ if (env.env !== 'production') {
   middleware.push(createLogger({}))
 }
 
-let store: any = null
+let REDUX_STORE: Store | null = null
 
-const configureStore = () => {
-  if (!store) {
-    store = createStore(
-      // @ts-ignore
-      reducers,
-      applyMiddleware(...middleware)
-    )
+const getStore: () => Store = () => {
+  if (!REDUX_STORE) {
+    // TODO:
+    // @ts-ignore
+    REDUX_STORE = createStore(reducers, applyMiddleware(...middleware))
   }
-  return store
+  return REDUX_STORE as Store
 }
 
-export default configureStore
+export default getStore
+
+export const dispatch = (action: AnyAction) => {
+  const { dispatch: _dispatch } = getStore()
+  _dispatch(action)
+}

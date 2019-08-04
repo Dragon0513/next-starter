@@ -2,11 +2,13 @@ import Empty from 'COMPONENTS/base/Empty'
 import Icon from 'COMPONENTS/base/Icon'
 import Image from 'COMPONENTS/base/Image'
 import AppActions from 'REDUX/app/actions'
+import { set } from 'REDUX/canonical/actions'
 import { palettePrimaryMain } from 'UTILS/theme'
 import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import styled from 'styled-components'
+import { dispatch } from 'REDUX/store'
 
 import Button from '@material-ui/core/Button'
 
@@ -14,7 +16,7 @@ const StyledButton = styled(Button)`
   font-size: 50px;
 `
 
-class App extends React.PureComponent {
+class App extends React.Component {
   state = {}
 
   componentDidMount () {
@@ -22,16 +24,25 @@ class App extends React.PureComponent {
     actions.initApp()
 
     const fetch = async () => {
-      console.log('fetch1')
-      const data1 = await actions.tryToFetchLocationsConfig()
-      console.log('data1', data1)
+      // console.log('fetch1')
+      // const data1 = await actions.tryToFetchLocationsConfig()
+      // console.log('data1', data1)
 
-      console.log('fetch2')
-      const data2 = await actions.tryToFetchLocationsConfig()
-      console.log('data2', data2)
+      // console.log('fetch2')
+      // const data2 = await actions.tryToFetchLocationsConfig()
+      // console.log('data2', data2)
+      dispatch(set('app.level1.array[1].name', 'english?'))
     }
 
     fetch()
+  }
+
+  componentWillUpdate (nextProps) {
+    const { level1 } = this.props
+    const { level1: nextlevel1 } = nextProps
+
+    console.log(level1, nextlevel1)
+    console.log(level1 === nextlevel1)
   }
 
   render () {
@@ -68,7 +79,7 @@ class App extends React.PureComponent {
 }
 
 const mapStateToProps = state => {
-  return {}
+  return { level1: state.app.level1 }
 }
 
 const mapDispatchToProps = dispatch => ({

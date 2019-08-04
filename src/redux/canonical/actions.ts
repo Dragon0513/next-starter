@@ -14,8 +14,26 @@ export interface ReceiveDataPayload {
   data: any
 }
 
+type Many<T> = T | ReadonlyArray<T>
+type PropertyName = string | number | symbol;
+type PropertyPath = Many<PropertyName>
+
+
+export interface SetDataPayload {
+  path: PropertyPath
+  data: any
+}
+
 export const fetchData = createAction<FetchDatePayload>('FETCH_DATA')
 export const receiveData = createAction<ReceiveDataPayload>('RECEIVE_DATA')
+export const setData = createAction<SetDataPayload>('SET_DATA')
+
+export const set: (
+  path: PropertyPath,
+  data: any
+) => ThunkAction<void, RootStateTypes, void, any> = (path, data) => (dispatch) => {
+  dispatch(setData({ path, data }))
+}
 
 interface LoadingStateTypes {
   loading?: boolean

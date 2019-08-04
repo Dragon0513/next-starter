@@ -1,7 +1,22 @@
 import { handleActions } from 'redux-actions'
 
 const initialState = {
-  language: ''
+  language: '',
+  level1: {
+    level2: {
+      level3: {
+        name: '???'
+      }
+    },
+    array: [
+      {
+        name: 1,
+      },
+      {
+        name: 2
+      }
+    ]
+  }
 }
 
 const appReducers = handleActions(

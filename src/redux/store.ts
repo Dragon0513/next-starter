@@ -9,14 +9,16 @@ import reducers from '../redux/reducers'
 const middleware = [ thunk ]
 
 if (env.env !== 'production') {
-  middleware.push(createLogger())
+  // @ts-ignore
+  middleware.push(createLogger({}))
 }
 
-let store = null
+let store: any = null
 
 const configureStore = () => {
   if (!store) {
     store = createStore(
+      // @ts-ignore
       reducers,
       applyMiddleware(...middleware)
     )

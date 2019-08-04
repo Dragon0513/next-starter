@@ -1,4 +1,7 @@
 import { handleActions } from 'redux-actions'
+import { fetchData, receiveData, FetchDatePayload, ReceiveDataPayload } from 'REDUX/canonical/actions'
+import { RootStateTypes } from 'TYPES/redux';
+import _ from 'lodash'
 
 /**
  *  单个数据拥有的字段
@@ -10,17 +13,19 @@ import { handleActions } from 'redux-actions'
  *  }
  */
 const initialState = {
+  app: { name: '???', language: '...' }
 }
 
 const canonical = handleActions({
-  FETCH_DATA: (state, action) => {
+  [fetchData.toString()]: (state: RootStateTypes, action: { payload: FetchDatePayload }) => {
     const { location, key } = action.payload
+    const locationState = _.get(state, location)
 
     return {
       ...state,
       [location]: {
-        ...state[location],
-        [key]: state[location][key],
+        ...locationState,
+        [key]: locationState[key],
         [`${key}Loading`]: {
           loading: true,
           loadingTime: new Date().valueOf()
@@ -29,16 +34,17 @@ const canonical = handleActions({
     }
   },
 
-  RECEIVE_DATA: (state, action) => {
+  [receiveData.toString()]: (state: RootStateTypes, action: { payload: ReceiveDataPayload }) => {
     const { location, key, data } = action.payload
+    const locationState = _.get(state, location)
 
     return {
       ...state,
       [location]: {
-        ...state[location],
+        ...locationState,
         [key]: data,
         [`${key}Loading`]: {
-          ...state[location][`${key}Loading`],
+          ...locationState[`${key}Loading`],
           loading: false,
           updateTime: new Date().valueOf()
         }

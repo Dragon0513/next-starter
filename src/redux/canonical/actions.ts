@@ -1,9 +1,21 @@
-import { createActions } from 'redux-actions'
-import { Dispatch } from 'redux'
+import { createAction } from 'redux-actions'
 import { RootStateTypes } from 'TYPES/redux'
 import _ from 'lodash'
+import { ThunkAction } from 'redux-thunk';
 
-const { fetchData, receiveData } = createActions('FETCH_DATA', 'RECEIVE_DATA')
+export interface FetchDatePayload {
+  location: string
+  key: string
+}
+
+export interface ReceiveDataPayload {
+  location: string
+  key: string
+  data: any
+}
+
+export const fetchData = createAction<FetchDatePayload>('FETCH_DATA')
+export const receiveData = createAction<ReceiveDataPayload>('RECEIVE_DATA')
 
 interface LoadingStateTypes {
   loading?: boolean
@@ -68,7 +80,9 @@ const getDefaultOption: (options: TryToFetchOptionTypes) => FormatedOptinoTypes 
  * loading key 可配置
  * 使用特殊的key，'Loading' 太容易冲突
  */
-export const tryToFetch: (tryToFetchOption: TryToFetchOptionTypes) => any = (tryToFetchOption) => async (dispatch: Dispatch, getState) => {
+export const tryToFetch: (
+  tryToFetchOption: TryToFetchOptionTypes
+) => ThunkAction<any, RootStateTypes, void, any> = (tryToFetchOption) => async (dispatch, getState) => {
   const options = getDefaultOption(tryToFetchOption)
   const { location, key, fetchFunc, formate } = options
 

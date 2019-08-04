@@ -5,7 +5,7 @@ import { RootStateTypes } from 'TYPES/redux';
 
 const { initApp } = createActions('INIT_APP')
 
-const getDate = () => new Promise((resolve, reject) => {
+const getDate = () => new Promise((resolve) => {
   setTimeout(() => {
     resolve({ name: 'redux' })
   }, 1000)

@@ -144,12 +144,13 @@ export const scrollbar = css`
   }
 `
 
-export const getMyTypographyFontFamily = fontWeight => {
+export const getMyTypographyFontFamily = (fontWeight: string) => {
   const keys = Object.keys(myTypographyFontFamily)
   for (const key of keys) {
     const parsedKey = parseInt(key, 10)
     const parsedFontWeight = parseInt(fontWeight, 10)
     if (parsedFontWeight <= parsedKey) {
+      // @ts-ignore
       return myTypographyFontFamily[key]
     }
   }
@@ -194,6 +195,7 @@ export const not = (...keys: string[]) => (
   value: Function | string
 ) => (props: {}) => {
   for (const key of keys) {
+    // @ts-ignore
     if (props[key]) {
       return ''
     }
@@ -205,6 +207,7 @@ export const check = (...keys: string[]) => (
   value: Function | string
 ) => (props: {}) => {
   for (const key of keys) {
+    // @ts-ignore
     if (props[key]) {
       return typeof value === 'function' ? value(props) : value
     }
@@ -213,6 +216,7 @@ export const check = (...keys: string[]) => (
 }
 
 export const checkBy = (property: string, mapping: {}) => (props: {}) => {
+  // @ts-ignore
   const value = mapping[props[property]]
   return typeof value === 'function' ? value(props) : value
 }

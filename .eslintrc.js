@@ -17,7 +17,7 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module'
   },
-  plugins: ['babel', 'react', 'standard'],
+  plugins: ['react', 'standard'],
   rules: {
     'react/prop-types': 0
   }

@@ -6,7 +6,7 @@ import env from 'ENV'
 
 import reducers from '../redux/reducers'
 
-const middleware = [ thunk ]
+const middleware = [thunk]
 
 if (env.env !== 'production') {
   // @ts-ignore

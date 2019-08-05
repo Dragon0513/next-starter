@@ -2,7 +2,6 @@ import Empty from 'COMPONENTS/base/Empty'
 import Icon from 'COMPONENTS/base/Icon'
 import Image from 'COMPONENTS/base/Image'
 import AppActions from 'REDUX/app/actions'
-// @ts-ignore
 import { set } from 'redux-control'
 import { palettePrimaryMain } from 'UTILS/theme'
 import React, { Fragment } from 'react'

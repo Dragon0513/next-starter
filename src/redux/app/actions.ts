@@ -1,5 +1,4 @@
 import { createActions } from 'redux-actions'
-// @ts-ignore
 import { tryToFetch } from 'redux-control'
 import { ThunkAction } from 'redux-thunk'
 import { RootStateTypes } from 'TYPES/redux'

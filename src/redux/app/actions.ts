@@ -14,8 +14,7 @@ const getDate = () => new Promise((resolve) => {
 const tryToFetchLocationsConfig: () => ThunkAction<void, RootStateTypes, void, any> = () => (dispatch) => {
   return dispatch(
     tryToFetch({
-      location: 'app',
-      key: 'locationsConfig',
+      path: 'app.load',
       fetchFunc: getDate,
       ttl: 10000
     })

@@ -1,9 +1,8 @@
-import { createAction } from 'redux-actions'
-import { RootStateTypes } from 'TYPES/redux'
-import _ from 'lodash'
+import { get } from 'lodash'
 import { ThunkAction } from 'redux-thunk'
 import { batchActions } from 'redux-batched-actions'
 import castPath from './utils/castPath'
+import { Action } from 'redux'
 
 export interface FetchDatePayload {
   location: string
@@ -25,13 +24,16 @@ export interface SetDataPayload {
   data: any
 }
 
-export const setData = createAction<SetDataPayload>('SET_DATA')
+const setData: (option: SetDataPayload) => Action = (option) => ({
+  type: `SET_DATA_@${option.path.join('.')}`,
+  payload: option
+})
 
 // TODO: 添加部分数组快速操作语法糖
 export const set: (
   path: PropertyPath,
   data: any
-) => ThunkAction<void, RootStateTypes, void, any> = (path, data) => (dispatch, getState) => {
+) => ThunkAction<void, any, void, any> = (path, data) => (dispatch, getState) => {
   const state = getState()
   const arrayPath = castPath(path, state)
   dispatch(setData({ path: arrayPath, data }))
@@ -43,18 +45,18 @@ interface LoadingStateTypes {
   updateTime?: number
 }
 
-const getLoadingPath = (path: string[]) => {
+const getLoadingPath = (path: string[], loadingSuffix: string) => {
   return path.map((item, index) => (
     index === path.length - 1
-      ? `${item}@Loading`
+      ? `${item}${loadingSuffix}`
       : item
   ))
 }
 
-const shouldFetch = (state: RootStateTypes, options: FormatedOptinoTypes) => {
-  const { ttl, path } = options
+const shouldFetch = (state: any, options: FormatedOptinoTypes) => {
+  const { ttl, path, loadingSuffix } = options
 
-  const loadingState = _.get(state, getLoadingPath(path), {}) as LoadingStateTypes
+  const loadingState = get(state, getLoadingPath(path, loadingSuffix), {}) as LoadingStateTypes
   const { loading, updateTime } = loadingState
 
   if (loading) {
@@ -75,6 +77,7 @@ interface TryToFetchOptionTypes {
   fetchFunc: () => void
   formate?: (data: any) => any
   ttl?: number
+  loadingSuffix?: string
 }
 
 interface FormatedOptinoTypes {
@@ -82,17 +85,19 @@ interface FormatedOptinoTypes {
   fetchFunc: () => void
   formate: (data: any) => any
   ttl: number
+  loadingSuffix: string
 }
 
 const getDefaultOption: (
   options: TryToFetchOptionTypes,
-  state: RootStateTypes
+  state: any
 ) => FormatedOptinoTypes = (options, state) => {
   const {
     path,
     fetchFunc,
     formate = (data: any) => data,
-    ttl = 0
+    ttl = 0,
+    loadingSuffix = '@Loading'
   } = options
 
   const arrayPath = castPath(path, state)
@@ -101,7 +106,8 @@ const getDefaultOption: (
     path: arrayPath,
     fetchFunc,
     formate,
-    ttl
+    ttl,
+    loadingSuffix
   }
 }
 
@@ -112,16 +118,16 @@ const getDefaultOption: (
  */
 export const tryToFetch: (
   tryToFetchOption: TryToFetchOptionTypes
-) => ThunkAction<any, RootStateTypes, void, any> = (tryToFetchOption) => async (dispatch, getState) => {
+) => ThunkAction<any, any, void, any> = (tryToFetchOption) => async (dispatch, getState) => {
   const state = getState()
   const options = getDefaultOption(tryToFetchOption, state)
-  const { path, fetchFunc, formate } = options
+  const { path, fetchFunc, formate, loadingSuffix } = options
 
   if (!shouldFetch(state, options)) {
-    return _.get(state, path)
+    return get(state, path)
   }
 
-  const loadingPath = getLoadingPath(path)
+  const loadingPath = getLoadingPath(path, loadingSuffix)
 
   dispatch(set(loadingPath, {
     loading: true,
@@ -129,7 +135,7 @@ export const tryToFetch: (
   }))
   const res = await fetchFunc()
   const formateData = formate(res)
-  const loadingState = _.get(getState(), loadingPath)
+  const loadingState = get(getState(), loadingPath)
 
   dispatch(batchActions(
     [

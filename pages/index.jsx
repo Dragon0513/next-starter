@@ -24,14 +24,14 @@ class App extends React.Component {
     actions.initApp()
 
     const fetch = async () => {
-      // console.log('fetch1')
-      // const data1 = await actions.tryToFetchLocationsConfig()
-      // console.log('data1', data1)
-
-      // console.log('fetch2')
-      // const data2 = await actions.tryToFetchLocationsConfig()
-      // console.log('data2', data2)
       dispatch(set('app.level1.array[1].name', 'english?'))
+      console.log('fetch1')
+      const data1 = await actions.tryToFetchLocationsConfig()
+      console.log('data1', data1)
+
+      console.log('fetch2')
+      const data2 = await actions.tryToFetchLocationsConfig()
+      console.log('data2', data2)
     }
 
     fetch()

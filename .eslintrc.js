@@ -20,5 +20,11 @@ module.exports = {
   plugins: ['react', 'standard'],
   rules: {
     'react/prop-types': 0
+  },
+  settings: {
+    react: {
+      pragma: 'React',
+      version: 'detect'
+    }
   }
 }

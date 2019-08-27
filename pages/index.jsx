@@ -4,11 +4,9 @@ import Image from 'COMPONENTS/base/Image'
 import AppActions from 'REDUX/app/actions'
 import { set } from 'redux-control'
 import { palettePrimaryMain } from 'UTILS/theme'
-import React, { Fragment } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import styled from 'styled-components'
-import { dispatch } from 'REDUX/store'
 
 import Button from '@material-ui/core/Button'
 
@@ -20,17 +18,16 @@ class App extends React.Component {
   state = {}
 
   componentDidMount () {
-    const { actions } = this.props
-    actions.initApp()
+    AppActions.initApp()
 
     const fetch = async () => {
-      dispatch(set('app.level1.array[1].name', 'english?'))
+      set('app.level1.array[1].name', 'english?')
       console.log('fetch1')
-      const data1 = await actions.tryToFetchLocationsConfig()
+      const data1 = await AppActions.tryToFetchLocationsConfig()
       console.log('data1', data1)
 
       console.log('fetch2')
-      const data2 = await actions.tryToFetchLocationsConfig()
+      const data2 = await AppActions.tryToFetchLocationsConfig()
       console.log('data2', data2)
     }
 
@@ -47,7 +44,7 @@ class App extends React.Component {
 
   render () {
     return (
-      <Fragment>
+      <>
         <StyledButton variant='contained' color='primary'>
           Hello world
         </StyledButton>
@@ -73,7 +70,7 @@ class App extends React.Component {
         >
           <Empty height='10rem' />
         </Image>
-      </Fragment>
+      </>
     )
   }
 }
@@ -82,11 +79,4 @@ const mapStateToProps = state => {
   return { level1: state.app.level1 }
 }
 
-const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators(AppActions, dispatch)
-})
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App)
+export default connect(mapStateToProps)(App)

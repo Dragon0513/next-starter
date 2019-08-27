@@ -17,15 +17,12 @@ void,
 RootStateTypes,
 void,
 any
-> = () => dispatch => {
-  return dispatch(
-    tryToFetch({
-      path: 'app.load',
-      fetchFunc: getDate,
-      ttl: 10000
-    })
-  )
-}
+> = () =>
+  tryToFetch({
+    path: 'app.load',
+    fetchFunc: getDate,
+    ttl: 10000
+  })
 
 export default {
   initApp,

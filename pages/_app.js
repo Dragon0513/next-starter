@@ -25,9 +25,7 @@ class MyApp extends App {
           {/* <GlobalStyle /> */}
           <ThemeProvider theme={theme}>
             <Provider store={store}>
-              <Fragment>
-                <Component {...pageProps} />
-              </Fragment>
+              <Component {...pageProps} />
             </Provider>
           </ThemeProvider>
         </MuiProvider>

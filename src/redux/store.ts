@@ -1,4 +1,5 @@
-import { createStore, applyMiddleware, Store, AnyAction } from 'redux'
+import { createStore, applyMiddleware, Store } from 'redux'
+import { autoDispatch } from 'redux-control'
 
 import thunk from 'redux-thunk'
 import { createLogger } from 'redux-logger'
@@ -18,12 +19,9 @@ let REDUX_STORE: Store | null = null
 const getStore: () => Store = () => {
   if (!REDUX_STORE) {
     REDUX_STORE = createStore(reducers, applyMiddleware(...middleware))
+    autoDispatch(REDUX_STORE)
   }
   return REDUX_STORE as Store
 }
 
 export default getStore
-
-export const dispatch = (action: AnyAction) => {
-  getStore().dispatch(action)
-}

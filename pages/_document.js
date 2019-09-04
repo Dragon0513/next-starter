@@ -1,20 +1,14 @@
+import React from 'react'
+import Document, { Head, Main, NextScript } from 'next/document'
 import IcoIcon from 'COMPONENTS/base/IcoIcon'
 import { palettePrimaryMain } from 'UTILS/theme'
-import Document, { Head, Main, NextScript } from 'next/document'
-import React from 'react'
 import { ServerStyleSheet as StyledServerStyleSheet } from 'styled-components'
 import flush from 'styled-jsx/server'
 import { ServerStyleSheets as MuiServerStyleSheet } from '@material-ui/styles'
-import sprite from 'svg-sprite-loader/runtime/sprite.build'
-
-const requireAll = requireContext => requireContext.keys().map(requireContext)
-const req = require.context('RESOURCE/icon', true, /\.svg$/)
-requireAll(req)
-
-const spriteContent = sprite.stringify()
+import SvgSprite from 'COMPONENTS/expand/SvgSprite'
 
 class MyDocument extends Document {
-  render () {
+  render() {
     return (
       <html lang='zh-CN' dir='ltr'>
         <Head>
@@ -32,7 +26,7 @@ class MyDocument extends Document {
           <meta name='theme-color' content={palettePrimaryMain()} />
         </Head>
         <body>
-          <div dangerouslySetInnerHTML={{ __html: spriteContent }} />
+          <SvgSprite />
           <Main />
           <NextScript />
         </body>
@@ -40,7 +34,7 @@ class MyDocument extends Document {
     )
   }
 
-  static async getInitialProps (ctx) {
+  static async getInitialProps(ctx) {
     const styledSheet = new StyledServerStyleSheet()
     const sheets = new MuiServerStyleSheet()
     const originalRenderPage = ctx.renderPage
@@ -57,11 +51,11 @@ class MyDocument extends Document {
         ...initialProps,
         // Styles fragment is rendered after the app and page rendering finish.
         styles: (
-          <React.Fragment>
+          <>
             {sheets.getStyleElement()}
             {flush() || null}
             {styledSheet.getStyleElement()}
-          </React.Fragment>
+          </>
         )
       }
       /* eslint-enable */

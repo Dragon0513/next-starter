@@ -3,15 +3,15 @@ const Uploader = require('./Uploader')
 var fs = require('fs')
 
 const getFileMd5 = filePath =>
-  new Promise((resolve, reject) => {
+  new Promise(resolve => {
     const stream = fs.createReadStream(filePath)
     const hash = crypto.createHash('md5')
 
-    stream.on('data', function (d) {
+    stream.on('data', function(d) {
       hash.update(d)
     })
 
-    stream.on('end', function () {
+    stream.on('end', function() {
       var md5 = hash.digest('hex')
       resolve(md5.toString().toUpperCase())
     })

@@ -2,7 +2,7 @@ import parse from 'url-parse'
 
 const formatUrl = (href, { target, staticSuffix, host }) => {
   let unifyHref = href || '/'
-  let res = {
+  const res = {
     nextHref: '',
     nextAs: '',
     aHref: '',

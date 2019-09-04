@@ -17,7 +17,7 @@ const StyledButton = styled(Button)`
 class App extends React.Component {
   state = {}
 
-  componentDidMount () {
+  componentDidMount() {
     AppActions.initApp()
 
     const fetch = async () => {
@@ -34,7 +34,7 @@ class App extends React.Component {
     fetch()
   }
 
-  componentWillUpdate (nextProps) {
+  componentWillUpdate(nextProps) {
     const { level1 } = this.props
     const { level1: nextlevel1 } = nextProps
 
@@ -42,7 +42,7 @@ class App extends React.Component {
     console.log(level1 === nextlevel1)
   }
 
-  render () {
+  render() {
     return (
       <>
         <StyledButton variant='contained' color='primary'>

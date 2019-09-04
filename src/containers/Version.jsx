@@ -3,7 +3,7 @@ import React from 'react'
 
 import { Typography } from '@material-ui/core'
 
-function VersionInfo () {
+function VersionInfo() {
   const buildTime = process.env.BUILD_TIME
   const time = moment(new Date(buildTime)).format('YYYY-MM-DD HH:MM')
 

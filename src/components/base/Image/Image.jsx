@@ -44,7 +44,7 @@ const GradientRight = styled(Gradient)`
   background-image: linear-gradient(to left, ${p('color')} 0%, rgba(0, 0, 0, 0) 100%);
 `
 
-function Image (props) {
+function Image(props) {
   const {
     src,
     srcSet = {},

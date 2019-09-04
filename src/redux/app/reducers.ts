@@ -10,7 +10,7 @@ const initialState = {
     },
     array: [
       {
-        name: 1,
+        name: 1
       },
       {
         name: 2
@@ -21,7 +21,7 @@ const initialState = {
 
 const appReducers = handleActions(
   {
-    INIT_APP: (state) => {
+    INIT_APP: state => {
       return state
     }
   },

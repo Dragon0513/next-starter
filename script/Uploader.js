@@ -9,7 +9,7 @@ const g = (key, defaultValue) => process.env[key] || defaultValue || ''
 const PUBLIC_PATH = path.resolve(__dirname, '../out')
 
 class Uploader {
-  constructor ({ getUploadOption }) {
+  constructor({ getUploadOption }) {
     this.store = oss({
       accessKeyId: g('ALI_ACCESS_ID'),
       accessKeySecret: g('ALI_ACCESS_KEY'),
@@ -23,7 +23,7 @@ class Uploader {
     this.getUploadOption = getUploadOption
   }
 
-  async uploadFolder ({ folder, prefix = '' }) {
+  async uploadFolder({ folder, prefix = '' }) {
     const names = fs.readdirSync(folder)
     for (const name of names) {
       const filepath = path.resolve(folder, name)
@@ -50,7 +50,7 @@ class Uploader {
         }
 
         if (shouldUpload) {
-          let promise = () => this.store.put(fileName, filePath, option)
+          const promise = () => this.store.put(fileName, filePath, option)
           this.promises.push(promise)
         }
       } else {
@@ -59,13 +59,13 @@ class Uploader {
     }
   }
 
-  async refresh () {
+  async refresh() {
     console.log('\nStart Refresh CDN...')
     await refreshObjectCaches()
     console.log('\nRefresh complete !')
   }
 
-  async upload () {
+  async upload() {
     console.log(`Upload new static resource to ${JSON.stringify(config.oss)}`)
     await this.uploadFolder({ folder: PUBLIC_PATH, prefix: '' })
     this.bar = this.bar = new ProgressBar(':bar :current /:total :percent', {
@@ -81,7 +81,7 @@ class Uploader {
     console.log('\nUpload complete !')
   }
 
-  async clean () {
+  async clean() {
     console.log('Clean OSS files...')
     const { objects = [] } = await this.store.list()
     const oldName = objects.map(item => item.name)

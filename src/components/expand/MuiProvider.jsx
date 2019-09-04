@@ -4,7 +4,7 @@ import { ThemeProvider, StylesProvider } from '@material-ui/styles'
 import theme from 'UTILS/theme'
 
 class MuiProvider extends React.PureComponent {
-  componentDidMount () {
+  componentDidMount() {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector('#jss-server-side')
     if (jssStyles && jssStyles.parentNode) {
@@ -12,7 +12,7 @@ class MuiProvider extends React.PureComponent {
     }
   }
 
-  render () {
+  render() {
     const { children } = this.props
 
     return (

@@ -13,10 +13,10 @@ const getDate = () =>
   })
 
 const tryToFetchLocationsConfig: () => ThunkAction<
-void,
-RootStateTypes,
-void,
-any
+  void,
+  RootStateTypes,
+  void,
+  any
 > = () =>
   tryToFetch({
     path: 'app.load',

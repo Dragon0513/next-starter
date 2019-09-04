@@ -16,7 +16,7 @@ app.prepare().then(() => {
   const server = new Koa()
   const router = new Router()
 
-  redirects.forEach(({ from, to, type = 301, method = 'get' }) => {
+  redirects.forEach(({ from, to, method = 'get' }) => {
     router[method](from, async ctx => {
       await app.render(ctx.req, ctx.res, to, ctx.query)
       ctx.respond = false

@@ -7,7 +7,7 @@ const { staticSuffix } = env
 const routers = ['/index']
 
 module.exports = withTypescript({
-  webpack: (config, { buildId, dev, isServer, defaultLoaders }) => {
+  webpack: config => {
     // Perform customizations to webpack config
     // Important: return the modified config
     const originalEntry = config.entry
@@ -42,7 +42,7 @@ module.exports = withTypescript({
     // Important: return the modified config
     return config
   },
-  exportPathMap: async function (defaultPathMap) {
+  exportPathMap: async function() {
     return routers.reduce((destination, item) => {
       if (typeof item === 'string') {
         return {

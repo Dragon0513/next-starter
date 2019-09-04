@@ -28,7 +28,7 @@ const errorHandler = error => {
 }
 
 const wait = time => () =>
-  new Promise((resolve, reject) => {
+  new Promise(resolve => {
     setTimeout(resolve, time)
   })
 

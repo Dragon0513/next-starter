@@ -17,7 +17,7 @@ const StyledLink = styled(({ color, decoration, ...other }) => (
   `)}
 `
 
-function Link (props) {
+function Link(props) {
   const {
     className,
     href,

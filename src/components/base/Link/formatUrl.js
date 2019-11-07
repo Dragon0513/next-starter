@@ -1,6 +1,6 @@
 import parse from 'url-parse'
 
-const formatUrl = (href, { target, staticSuffix, host }) => {
+const formatUrl = (href, { target, staticSuffix, host, routers }) => {
   let unifyHref = href || '/'
   const res = {
     nextHref: '',
@@ -22,15 +22,20 @@ const formatUrl = (href, { target, staticSuffix, host }) => {
 
   const parseUrl = parse(unifyHref)
   const { pathname, query } = parseUrl
-  res.nextHref = pathname
+
+  if (routers[pathname] != null) {
+    res.nextHref = routers[pathname].page
+  } else {
+    res.nextHref = pathname
+  }
 
   if (res.nextHref.match(/\/$/)) {
-    res.nextAs = `${res.nextHref}${
+    res.nextAs = `${pathname}${
       staticSuffix === '' ? '' : `index${staticSuffix}`
     }${query}`
     res.aHref = res.nextAs
   } else {
-    res.nextAs = `${res.nextHref}${staticSuffix}${query}`
+    res.nextAs = `${pathname}${staticSuffix}${query}`
     res.aHref = res.nextAs
   }
 

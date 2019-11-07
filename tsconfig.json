@@ -24,7 +24,8 @@
       "ENV/*": ["env/*"],
       "UTILS/*": ["src/utils/*"],
       "RESOURCE/*": ["src/resource/*"],
-      "TYPES/*": ["src/types/*"]
+      "TYPES/*": ["src/types/*"],
+      "CONFIG/*": ["config/*"]
     },
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,

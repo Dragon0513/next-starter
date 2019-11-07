@@ -8,7 +8,8 @@ const alias = {
   REDUX: resolve(__dirname, '../src/redux'),
   RESOURCE: resolve(__dirname, '../src/resource'),
   ENV: resolve(__dirname, '../env'),
-  UTILS: resolve(__dirname, '../src/utils')
+  UTILS: resolve(__dirname, '../src/utils'),
+  CONFIG: resolve(__dirname, '../config')
 }
 
 const svgLoader = {

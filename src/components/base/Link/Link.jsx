@@ -1,62 +1,45 @@
 import env from 'ENV'
-import { not } from 'UTILS/theme'
+import { check } from 'UTILS/theme'
 import NextLink from 'next/link'
 import React from 'react'
 import styled from 'styled-components'
 
+import MuiLink from '@material-ui/core/Link'
+import routers from 'CONFIG/routers'
+
 import formatUrl from './formatUrl'
 
-const { host, target: exportTarget, staticSuffix } = env
-
-const StyledLink = styled(({ color, decoration, ...other }) => (
-  <a {...other} />
+const StyledLink = styled(({ withoutLineHeight, ...props }) => (
+  <MuiLink {...props} />
 ))`
-  color: ${props => props.color};
-  ${not('decoration')(`
-    text-decoration: none;
+  ${check('withoutLineHeight')(`
+    line-height: 1;
   `)}
 `
 
+const { host, target: exportTarget, staticSuffix } = env
+
 function Link(props) {
-  const {
-    className,
-    href,
-    children,
-    decoration,
-    color,
-    target,
-    ...other
-  } = props
+  const { href, children, ...other } = props
 
   const res = formatUrl(href, {
     host,
     target: exportTarget,
-    staticSuffix
+    staticSuffix,
+    routers
   })
 
   if (!res.next) {
     return (
-      <StyledLink
-        target={target}
-        color={color}
-        href={res.aHref}
-        decoration={decoration}
-        className={className}
-      >
+      <StyledLink href={res.aHref} {...other}>
         {children}
       </StyledLink>
     )
   }
 
   return (
-    <NextLink href={res.nextHref} as={res.nextAs} {...other}>
-      <StyledLink
-        target={target}
-        color={color}
-        href={res.aHref}
-        decoration={decoration}
-        className={className}
-      >
+    <NextLink href={res.nextHref} as={res.nextAs}>
+      <StyledLink href={res.aHref} {...other}>
         {children}
       </StyledLink>
     </NextLink>

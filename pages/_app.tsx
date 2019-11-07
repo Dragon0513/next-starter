@@ -18,7 +18,6 @@ class MyApp extends App {
         <Head>
           <title>next-starter</title>
         </Head>
-
         <MuiProvider>
           <CssBaseline />
           {/* <Normalize /> */}

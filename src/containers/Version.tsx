@@ -1,11 +1,18 @@
 import moment from 'moment'
 import React from 'react'
 
-import { Typography } from '@material-ui/core'
+import Typography from 'COMPONENTS/base/Typography'
 
-function VersionInfo() {
+const getBuildTime: () => string = () => {
   const buildTime = process.env.BUILD_TIME
-  const time = moment(new Date(buildTime)).format('YYYY-MM-DD HH:MM')
+  if (buildTime) {
+    return moment(new Date(buildTime)).format('YYYY-MM-DD HH:MM')
+  }
+  return 'Unknow'
+}
+
+const VersionInfo: React.FC = () => {
+  const time = getBuildTime()
 
   return (
     <div>

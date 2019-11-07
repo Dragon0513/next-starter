@@ -1,5 +1,11 @@
 import React from 'react'
-import Document, { Head, Main, NextScript } from 'next/document'
+import Document, {
+  Head,
+  Main,
+  NextScript,
+  DocumentContext,
+  DocumentInitialProps
+} from 'next/document'
 import IcoIcon from 'COMPONENTS/base/IcoIcon'
 import { palettePrimaryMain } from 'UTILS/theme'
 import { ServerStyleSheet as StyledServerStyleSheet } from 'styled-components'
@@ -34,7 +40,9 @@ class MyDocument extends Document {
     )
   }
 
-  static async getInitialProps(ctx) {
+  static async getInitialProps(
+    ctx: DocumentContext
+  ): Promise<DocumentInitialProps> {
     const styledSheet = new StyledServerStyleSheet()
     const sheets = new MuiServerStyleSheet()
     const originalRenderPage = ctx.renderPage
@@ -61,6 +69,10 @@ class MyDocument extends Document {
       /* eslint-enable */
     } catch (err) {
       console.error(err)
+      const initialProps = await Document.getInitialProps(ctx)
+      return {
+        ...initialProps
+      }
     } finally {
       styledSheet.seal()
     }

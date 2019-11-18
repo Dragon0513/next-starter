@@ -1,16 +1,28 @@
 import parse from 'url-parse'
+import { Routers } from 'CONFIG/routers'
 
-const formatUrl = (href, { target, staticSuffix, host, routers }) => {
-  let unifyHref = href || '/'
+interface FormatUrlOption {
+  target: string
+  staticSuffix: string
+  host: string
+  routers: Routers
+}
+
+const formatUrl: (
+  href: string | undefined,
+  option: FormatUrlOption
+) => {
+  nextHref: string
+  nextAs: string
+  aHref: string
+  next: boolean
+} = (href, { target, staticSuffix, host, routers }) => {
+  const unifyHref = href || '/'
   const res = {
     nextHref: '',
     nextAs: '',
     aHref: '',
     next: false
-  }
-
-  if (href && href.pathname) {
-    unifyHref = href.pathname
   }
 
   // 站外链接

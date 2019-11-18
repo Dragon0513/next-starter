@@ -1,6 +1,27 @@
 import React from 'react'
 import { breakpointsDown } from 'UTILS/theme'
 import styled from 'styled-components'
+interface Gradient {
+  width: string
+}
+
+type SrcKey = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+
+interface SrcSet {
+  xs?: string
+  sm?: string
+  md?: string
+  lg?: string
+  xl?: string
+}
+
+export interface ImageProps {
+  src?: string
+  srcSet: SrcSet // TODO:
+  gradient?: Gradient | null // TODO:
+  pictureProps?: object
+  color?: string
+}
 
 const Banner = styled(({ color, ...props }) => <div {...props} />)`
   position: relative;
@@ -25,26 +46,26 @@ const VerticalImage = styled.img`
   user-select: none;
 `
 
-const p = key => props => props[key]
+const pick: (key: string) => (props: any) => string = key => props => props[key]
 
 // prettier-ignore
 const Gradient = styled(({ color, width, ...props }) => <div {...props} />)`
   position: absolute;
-  width: ${p('width')};
+  width: ${pick('width')};
   height: 100%;
   top: 0;
   left: 0;
-  background-image: linear-gradient(to right, ${p('color')} 0%, rgba(0, 0, 0, 0) 100%);
+  background-image: linear-gradient(to right, ${pick('color')} 0%, rgba(0, 0, 0, 0) 100%);
 `
 
 // prettier-ignore
 const GradientRight = styled(Gradient)`
   left: unset;
   right: 0;
-  background-image: linear-gradient(to left, ${p('color')} 0%, rgba(0, 0, 0, 0) 100%);
+  background-image: linear-gradient(to left, ${pick('color')} 0%, rgba(0, 0, 0, 0) 100%);
 `
 
-function Image(props) {
+const Image: React.FC<ImageProps> = props => {
   const {
     src,
     srcSet = {},
@@ -55,7 +76,9 @@ function Image(props) {
     ...otherProps
   } = props
 
-  const set = Object.keys(srcSet).map(key => ({
+  const objectKeys = Object.keys(srcSet) as SrcKey[]
+
+  const set = objectKeys.map(key => ({
     media: breakpointsDown(key).replace('@media', ''),
     srcSet: srcSet[key]
   }))
@@ -66,7 +89,7 @@ function Image(props) {
         {set.map(item => (
           <source media={item.media} srcSet={item.srcSet} key={item.media} />
         ))}
-        <VerticalImage src={src} draggable='false' />
+        <VerticalImage src={src} draggable={false} />
         {gradient && <Gradient color={color} width={gradient.width} />}
         {gradient && <GradientRight color={color} width={gradient.width} />}
       </VerticalPicture>

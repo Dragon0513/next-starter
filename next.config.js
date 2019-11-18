@@ -1,12 +1,7 @@
+const routers = require('./config/routers')
 const { alias, loaders, plugins } = require('./config/webpack.base')
-const env = require('./env')
-const withTypescript = require('@zeit/next-typescript')
 
-const { staticSuffix } = env
-
-const routers = ['/index']
-
-module.exports = withTypescript({
+module.exports = {
   webpack: config => {
     // Perform customizations to webpack config
     // Important: return the modified config
@@ -42,22 +37,7 @@ module.exports = withTypescript({
     // Important: return the modified config
     return config
   },
-  exportPathMap: async function() {
-    return routers.reduce((destination, item) => {
-      if (typeof item === 'string') {
-        return {
-          ...destination,
-          [item]: { page: item },
-          [`${item}${staticSuffix}`]: { page: item }
-        }
-      } else {
-        const { key, page } = item
-        return {
-          ...destination,
-          [key]: { page },
-          [`${key}${staticSuffix}`]: { page }
-        }
-      }
-    }, {})
+  exportPathMap: async function () {
+    return routers
   }
-})
+}

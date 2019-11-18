@@ -1,5 +1,5 @@
 const ALY = require('aliyun-sdk')
-const config = require('../env')
+const config = require('../config/env')
 
 const g = (key, defaultValue) => process.env[key] || defaultValue || ''
 

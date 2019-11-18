@@ -1,4 +1,4 @@
-import config from 'ENV'
+import config from 'CONFIG/env'
 import configureStore from 'REDUX/store'
 import axios from 'axios'
 

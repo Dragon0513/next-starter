@@ -85,25 +85,6 @@ it('', () => {
   })
 })
 
-it('', () => {
-  const res = formatUrl(
-    { pathname: '/a?id=0' },
-    {
-      target: 'inner',
-      staticSuffix: '.html',
-      host: 'www.shianqi.com',
-      routers
-    }
-  )
-
-  expect(res).toEqual({
-    nextHref: '/a',
-    nextAs: '/a.html?id=0',
-    aHref: '/a.html?id=0',
-    next: true
-  })
-})
-
 it('should process outer use code', () => {
   const res = formatUrl('/a?id=0', {
     target: 'outer',

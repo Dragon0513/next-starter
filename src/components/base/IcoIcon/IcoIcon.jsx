@@ -1,6 +1,6 @@
 import React from 'react'
 
-function IcoIcon(props) {
+function IcoIcon (props) {
   const { href } = props
 
   return (

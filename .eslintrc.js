@@ -5,11 +5,7 @@ module.exports = {
     es6: true,
     jest: true
   },
-  extends: [
-    'standard',
-    'plugin:react/recommended',
-    'plugin:prettier/recommended'
-  ],
+  extends: ['standard', 'plugin:react/recommended'],
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly'
@@ -24,7 +20,6 @@ module.exports = {
   plugins: ['@typescript-eslint'],
   rules: {
     'react/prop-types': 0,
-    'prettier/prettier': 2,
     '@typescript-eslint/no-unused-vars': 2
   },
   settings: {

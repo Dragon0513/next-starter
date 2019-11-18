@@ -7,7 +7,7 @@ const alias = {
   CONTAINERS: resolve(__dirname, '../src/containers'),
   REDUX: resolve(__dirname, '../src/redux'),
   RESOURCE: resolve(__dirname, '../src/resource'),
-  ENV: resolve(__dirname, '../env'),
+  ENV: resolve(__dirname, '../config/env'),
   UTILS: resolve(__dirname, '../src/utils'),
   CONFIG: resolve(__dirname, '../config')
 }

@@ -1,5 +1,5 @@
-const config = require('../env')
-const { staticSuffix } = config
+// const config = require('../config/env')
+// const { staticSuffix } = config
 
 const routers = [
   '/index'
@@ -12,13 +12,15 @@ module.exports = routers.reduce((obj, item) => {
 
   if (typeof item === 'string') {
     router[item] = { page: item }
-    if (staticSuffix && staticSuffix !== '') {
-      router[`${item}${staticSuffix}`] = { page: item }
-    }
+    // TODO: check
+    // if (staticSuffix && staticSuffix !== '') {
+    //   router[`${item}${staticSuffix}`] = { page: item }
+    // }
   } else {
     const { key, page, ...others } = item
     router[key] = { page, query: others }
-    router[`${key}${staticSuffix}`] = { page, query: others }
+    // TODO: check
+    // router[`${key}${staticSuffix}`] = { page, query: others }
   }
 
   return router

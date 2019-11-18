@@ -1,3 +1,4 @@
+// @ts-ignore
 import normalize from 'normalize.css'
 import { createGlobalStyle } from 'styled-components'
 

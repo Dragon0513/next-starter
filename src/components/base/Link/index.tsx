@@ -1,13 +1,21 @@
-import env from 'ENV'
+import env from 'CONFIG/env'
 import { check } from 'UTILS/theme'
 import NextLink from 'next/link'
 import React from 'react'
 import styled from 'styled-components'
+import { StandardProps } from '@material-ui/core'
+import MuiLink, {
+  LinkProps as MuiLinkProps,
+  LinkClassKey as MuiLinkClassKey
+} from '@material-ui/core/Link'
 
-import MuiLink from '@material-ui/core/Link'
 import routers from 'CONFIG/routers'
-
 import formatUrl from './formatUrl'
+
+export interface LinkProps
+  extends StandardProps<MuiLinkProps, MuiLinkClassKey> {
+  withoutLineHeight?: boolean
+}
 
 const StyledLink = styled(({ withoutLineHeight, ...props }) => (
   <MuiLink {...props} />
@@ -19,7 +27,7 @@ const StyledLink = styled(({ withoutLineHeight, ...props }) => (
 
 const { host, target: exportTarget, staticSuffix } = env
 
-function Link(props) {
+const Link: React.ComponentType<LinkProps> = props => {
   const { href, children, ...other } = props
 
   const res = formatUrl(href, {

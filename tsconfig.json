@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": ".",
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "jsx": "preserve",
@@ -21,7 +21,6 @@
       "COMPONENTS/*": ["src/components/*"],
       "CONTAINERS/*": ["src/containers/*"],
       "REDUX/*": ["src/redux/*"],
-      "ENV/*": ["env/*"],
       "UTILS/*": ["src/utils/*"],
       "RESOURCE/*": ["src/resource/*"],
       "TYPES/*": ["src/types/*"],
@@ -32,6 +31,6 @@
     "resolveJsonModule": true,
     "isolatedModules": true
   },
-  "exclude": ["node_modules"],
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
+  "exclude": ["node_modules", "dist", ".next", "out", "coverage"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"]
 }

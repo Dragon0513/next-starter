@@ -3,7 +3,7 @@ import { autoDispatch } from 'redux-control'
 
 import thunk from 'redux-thunk'
 import { createLogger } from 'redux-logger'
-import env from 'ENV'
+import env from 'CONFIG/env'
 
 import reducers from '../redux/reducers'
 

@@ -191,12 +191,10 @@ export const typographyButtonLineHeight = () =>
   theme.typography.button.lineHeight
 export const shapeBorderRadius = () => theme.shape.borderRadius
 
-// TODO: Fix ts-ignore
-export const not = (...keys: string[]) => (
-  value: Function | string
-) => (props: {}) => {
+export const not = <P, K extends keyof P>(...keys: K[]) => (
+  value: ((props: P) => string) | string
+) => (props: P) => {
   for (const key of keys) {
-    // @ts-ignore
     if (props[key]) {
       return ''
     }
@@ -204,12 +202,10 @@ export const not = (...keys: string[]) => (
   return typeof value === 'function' ? value(props) : value
 }
 
-// TODO: Fix ts-ignore
-export const check = (...keys: string[]) => (
-  value: Function | string
-) => (props: {}) => {
+export const check = <P, K extends keyof P>(...keys: K[]) => (
+  value: ((props: P) => string) | string
+) => (props: P) => {
   for (const key of keys) {
-    // @ts-ignore
     if (props[key]) {
       return typeof value === 'function' ? value(props) : value
     }

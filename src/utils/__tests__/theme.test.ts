@@ -1,22 +1,42 @@
 import { checkBy, not, fp } from '../theme'
 
+interface Props1 {
+  hidden: boolean
+}
+
 it('should filter parameter', () => {
-  const res = not('hidden')('color: red;')({ hidden: true })
+  const res = not<Props1, keyof Props1>('hidden')('color: red;')({
+    hidden: true
+  })
   expect(res).toEqual('')
 })
 
+interface Props2 {
+  hidden?: boolean
+  hover?: boolean
+}
+
 it('should filter parameter', () => {
-  const res = not('hidden')('color: red;')({})
+  const res = not<Props2, keyof Props2>('hidden')('color: red;')({})
   expect(res).toEqual('color: red;')
 })
 
 it('should filter multiple parameters', () => {
-  const res = not('hover', 'hidden')('color: red;')({ hidden: true })
+  const res = not<Props2, keyof Props2>('hover', 'hidden')('color: red;')({
+    hidden: true
+  })
   expect(res).toEqual('')
 })
 
+interface Props3 {
+  color: string
+  hidden?: boolean
+}
+
 it('should handle functions', () => {
-  const res = not('hidden')(props => `color: ${props.color};`)({
+  const res = not<Props3, keyof Props3>('hidden')(
+    props => `color: ${props.color};`
+  )({
     color: 'white'
   })
   expect(res).toEqual('color: white;')

@@ -20,7 +20,7 @@ export interface LinkProps
 const StyledLink = styled((props: LinkProps) => (
   <MuiLink {...fp(props, ['withoutLineHeight'])} />
 ))`
-  ${check('withoutLineHeight')(`
+  ${check<LinkProps, keyof LinkProps>('withoutLineHeight')(`
     line-height: 1;
   `)}
 `

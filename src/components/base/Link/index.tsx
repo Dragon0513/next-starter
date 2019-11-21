@@ -1,5 +1,5 @@
 import env from 'CONFIG/env'
-import { check } from 'UTILS/theme'
+import { check, fp } from 'UTILS/theme'
 import NextLink from 'next/link'
 import React from 'react'
 import styled from 'styled-components'
@@ -17,8 +17,8 @@ export interface LinkProps
   withoutLineHeight?: boolean
 }
 
-const StyledLink = styled(({ withoutLineHeight, ...props }) => (
-  <MuiLink {...props} />
+const StyledLink = styled((props: LinkProps) => (
+  <MuiLink {...fp(props, ['withoutLineHeight'])} />
 ))`
   ${check('withoutLineHeight')(`
     line-height: 1;

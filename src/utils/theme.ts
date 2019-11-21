@@ -5,12 +5,12 @@ import { createMuiTheme } from '@material-ui/core/styles'
 import { ThemeOptions } from '@material-ui/core/styles/createMuiTheme'
 
 const myTypographyFontFamily = {
-  100: `"PingFangSC-Ultralight", "Helvetica Neue", Helvetica, Arial,  "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;`,
-  200: `"PingFangSC-Thin", "Helvetica Neue", Helvetica, Arial,  "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;`,
-  300: `"PingFangSC-Light", "Helvetica Neue", Helvetica, Arial,  "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;`,
-  400: `"PingFangSC", "Helvetica Neue", Helvetica, Arial,  "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;`,
-  500: `"PingFangSC-Medium", "Helvetica Neue", Helvetica, Arial,  "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;`,
-  900: `"PingFangSC-Semibold", "Helvetica Neue", Helvetica, Arial,  "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;`
+  100: '"PingFangSC-Ultralight", "Helvetica Neue", Helvetica, Arial,  "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;',
+  200: '"PingFangSC-Thin", "Helvetica Neue", Helvetica, Arial,  "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;',
+  300: '"PingFangSC-Light", "Helvetica Neue", Helvetica, Arial,  "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;',
+  400: '"PingFangSC", "Helvetica Neue", Helvetica, Arial,  "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;',
+  500: '"PingFangSC-Medium", "Helvetica Neue", Helvetica, Arial,  "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;',
+  900: '"PingFangSC-Semibold", "Helvetica Neue", Helvetica, Arial,  "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;'
 }
 
 const defaultTheme: ThemeOptions = {
@@ -56,7 +56,8 @@ const defaultTheme: ThemeOptions = {
     }
   },
   typography: {
-    fontFamily: `"PingFangSC", "Helvetica Neue", Helvetica, Arial,  "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;`,
+    fontFamily:
+      '"PingFangSC", "Helvetica Neue", Helvetica, Arial,  "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;',
     h1: {
       fontSize: '2.375rem', // 38px
       lineHeight: 1.3 // 37.33333px
@@ -190,7 +191,7 @@ export const typographyButtonLineHeight = () =>
   theme.typography.button.lineHeight
 export const shapeBorderRadius = () => theme.shape.borderRadius
 
-// styled-components 工具
+// TODO: Fix ts-ignore
 export const not = (...keys: string[]) => (
   value: Function | string
 ) => (props: {}) => {
@@ -203,6 +204,7 @@ export const not = (...keys: string[]) => (
   return typeof value === 'function' ? value(props) : value
 }
 
+// TODO: Fix ts-ignore
 export const check = (...keys: string[]) => (
   value: Function | string
 ) => (props: {}) => {
@@ -215,10 +217,25 @@ export const check = (...keys: string[]) => (
   return ''
 }
 
+// TODO: Fix ts-ignore
 export const checkBy = (property: string, mapping: {}) => (props: {}) => {
   // @ts-ignore
   const value = mapping[props[property]]
   return typeof value === 'function' ? value(props) : value
 }
+
+export const fp = <O, K extends keyof O>(props: O, keys: K[]) => {
+  const { ...newProps } = props
+
+  for (const key of keys) {
+    delete newProps[key]
+  }
+
+  return newProps as {
+    [key in Exclude<keyof O, K>]: O[key]
+  }
+}
+
+export const filterProps = fp
 
 export default theme

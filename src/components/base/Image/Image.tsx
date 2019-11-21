@@ -1,5 +1,5 @@
 import React from 'react'
-import { breakpointsDown } from 'UTILS/theme'
+import { breakpointsDown, fp } from 'UTILS/theme'
 import styled from 'styled-components'
 interface Gradient {
   width: string
@@ -23,7 +23,7 @@ export interface ImageProps {
   color?: string
 }
 
-const Banner = styled(({ color, ...props }) => <div {...props} />)`
+const Banner = styled(props => <div {...fp(props, ['color'])} />)`
   position: relative;
   overflow: hidden;
   background: ${props => props.color};
@@ -49,7 +49,7 @@ const VerticalImage = styled.img`
 const pick: (key: string) => (props: any) => string = key => props => props[key]
 
 // prettier-ignore
-const Gradient = styled(({ color, width, ...props }) => <div {...props} />)`
+const Gradient = styled((props) => <div {...fp(props, ['color', 'width'])} />)`
   position: absolute;
   width: ${pick('width')};
   height: 100%;

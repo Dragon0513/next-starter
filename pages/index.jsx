@@ -1,5 +1,6 @@
 import Empty from 'COMPONENTS/base/Empty'
 import Icon from 'COMPONENTS/base/Icon'
+import Link from 'COMPONENTS/base/Link'
 import Image from 'COMPONENTS/base/Image'
 import AppActions from 'REDUX/app/actions'
 import { set } from 'redux-control'
@@ -17,7 +18,7 @@ const StyledButton = styled(Button)`
 class App extends React.Component {
   state = {}
 
-  componentDidMount() {
+  componentDidMount () {
     AppActions.initApp()
 
     const fetch = async () => {
@@ -34,15 +35,7 @@ class App extends React.Component {
     fetch()
   }
 
-  componentWillUpdate(nextProps) {
-    const { level1 } = this.props
-    const { level1: nextlevel1 } = nextProps
-
-    console.log(level1, nextlevel1)
-    console.log(level1 === nextlevel1)
-  }
-
-  render() {
+  render () {
     return (
       <>
         <StyledButton variant='contained' color='primary'>
@@ -62,6 +55,7 @@ class App extends React.Component {
         >
           <Empty height='30rem' />
         </Image>
+        <Link href='/'>LINK</Link>
 
         <Image
           color='#dfdfdf'

@@ -1,5 +1,9 @@
 const { resolve } = require('path')
 const { DefinePlugin } = require('webpack')
+const ImageminPlugin = require('imagemin-webpack-plugin').default
+
+const { NODE_ENV } = process.env
+const isProduction = NODE_ENV === 'production'
 
 const alias = {
   API: resolve(__dirname, '../src/api'),
@@ -32,13 +36,25 @@ const plugins = [
     'process.env.npm_package_gitHead': JSON.stringify(
       process.env.npm_package_gitHead
     )
-  })
-]
+  }),
+  isProduction &&
+    new ImageminPlugin({
+      jpegtran: { progressive: true },
+      pngquant: {
+        quality: '95-100'
+      }
+    })
+].filter(item => item)
 
-const loaders = [cssLoader, svgLoader]
+const getWebpackConfig = () => {
+  const loaders = [cssLoader, svgLoader]
 
-module.exports = {
-  alias,
-  loaders,
-  plugins
+  return {
+    alias,
+    loaders,
+    plugins,
+    isProduction
+  }
 }
+
+module.exports = getWebpackConfig

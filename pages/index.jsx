@@ -10,6 +10,7 @@ import { connect } from 'react-redux'
 import styled from 'styled-components'
 
 import Button from '@material-ui/core/Button'
+import CatImage from 'RESOURCE/images/cat.png'
 
 const StyledButton = styled(Button)`
   font-size: 50px;
@@ -56,6 +57,7 @@ class App extends React.Component {
           <Empty height='30rem' />
         </Image>
         <Link href='/'>LINK</Link>
+        <img src={CatImage}></img>
 
         <Image
           color='#dfdfdf'

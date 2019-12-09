@@ -14,7 +14,7 @@ import { ServerStyleSheets as MuiServerStyleSheet } from '@material-ui/styles'
 import SvgSprite from 'COMPONENTS/expand/SvgSprite'
 
 class MyDocument extends Document {
-  render() {
+  render () {
     return (
       <html lang='zh-CN' dir='ltr'>
         <Head>
@@ -40,7 +40,7 @@ class MyDocument extends Document {
     )
   }
 
-  static async getInitialProps(
+  static async getInitialProps (
     ctx: DocumentContext
   ): Promise<DocumentInitialProps> {
     const styledSheet = new StyledServerStyleSheet()
@@ -58,13 +58,12 @@ class MyDocument extends Document {
       return {
         ...initialProps,
         // Styles fragment is rendered after the app and page rendering finish.
-        styles: (
-          <>
-            {sheets.getStyleElement()}
-            {flush() || null}
-            {styledSheet.getStyleElement()}
-          </>
-        )
+        styles: [
+          ...React.Children.toArray(initialProps.styles),
+          sheets.getStyleElement(),
+          flush() || null,
+          ...React.Children.toArray(styledSheet.getStyleElement())
+        ]
       }
       /* eslint-enable */
     } catch (err) {

@@ -1,8 +1,7 @@
-const widthImages = require('next-images')
 const routers = require('./config/routers')
 const getWebpackConfig = require('./config/webpack.base')
 
-module.exports = widthImages({
+module.exports = {
   webpack: (config, options) => {
     const { alias, loaders, plugins } = getWebpackConfig(options)
 
@@ -43,4 +42,4 @@ module.exports = widthImages({
   exportPathMap: async function () {
     return routers
   }
-})
+}

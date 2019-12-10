@@ -26,6 +26,29 @@ const cssLoader = {
   use: [{ loader: 'raw-loader' }]
 }
 
+const getImageLoader = config => ({
+  test: /\.(png|jpe?g)$/,
+  use: [
+    {
+      loader: 'sqip-loader',
+      options: {
+        numberOfPrimitives: 20,
+        blur: 10
+      }
+    },
+    {
+      loader: 'url-loader',
+      options: {
+        fallback: 'file-loader',
+        limit: '8192',
+        publicPath: '/_next/static/images/',
+        outputPath: `${config.isServer ? '../' : ''}static/images/`,
+        name: '[name]-[hash].[ext]'
+      }
+    }
+  ]
+})
+
 const plugins = [
   new DefinePlugin({
     'process.env.BUILD_ENV': JSON.stringify(process.env.BUILD_ENV),
@@ -46,8 +69,8 @@ const plugins = [
     })
 ].filter(item => item)
 
-const getWebpackConfig = () => {
-  const loaders = [cssLoader, svgLoader]
+const getWebpackConfig = config => {
+  const loaders = [cssLoader, svgLoader, getImageLoader(config)]
 
   return {
     alias,

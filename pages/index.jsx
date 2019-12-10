@@ -57,7 +57,8 @@ class App extends React.Component {
           <Empty height='30rem' />
         </Image>
         <Link href='/'>LINK</Link>
-        <img src={CatImage}></img>
+        <img src={CatImage.preview}></img>
+        <img src={CatImage.src} width='100%'></img>
 
         <Image
           color='#dfdfdf'

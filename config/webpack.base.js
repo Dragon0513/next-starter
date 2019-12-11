@@ -33,7 +33,7 @@ const getImageLoader = config => ({
       loader: 'sqip-loader',
       options: {
         numberOfPrimitives: 20,
-        blur: 10
+        blur: 4
       }
     },
     {

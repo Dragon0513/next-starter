@@ -10,7 +10,6 @@ import { connect } from 'react-redux'
 import styled from 'styled-components'
 
 import Button from '@material-ui/core/Button'
-import CatImage from 'RESOURCE/images/cat.png'
 
 const StyledButton = styled(Button)`
   font-size: 50px;
@@ -57,13 +56,12 @@ class App extends React.Component {
           <Empty height='30rem' />
         </Image>
         <Link href='/'>LINK</Link>
-        <Image src={CatImage}>
+        <Image color='#e8dfd7' src={require('RESOURCE/images/cat.png')}>
           <Empty height='10rem' />
         </Image>
 
         <Image
           color='#dfdfdf'
-          direction='horizontal'
           src='https://images.unsplash.com/photo-1444966450559-356cef77103f'
         >
           <Empty height='10rem' />
@@ -73,7 +71,7 @@ class App extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state: any) => {
   return { level1: state.app.level1 }
 }
 

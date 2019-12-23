@@ -33,7 +33,8 @@ const getImageLoader = config => ({
       loader: 'sqip-loader',
       options: {
         numberOfPrimitives: 20,
-        blur: 4
+        blur: 4,
+        skipPreviewIfBase64: true
       }
     },
     {

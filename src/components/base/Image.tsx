@@ -137,7 +137,7 @@ const Image: React.FC<ImageProps> = props => {
             draggable={false}
             style={{
               opacity: loading ? 0.95 : 0,
-              transition: spend > 300 ? 'all ease-in-out 1s' : 'none'
+              transition: spend > 300 ? 'all ease-in-out 1s' : 'none' // TODO: props
             }}
           />
         )}

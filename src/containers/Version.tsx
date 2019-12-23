@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Typography from 'COMPONENTS/base/Typography'
 import Empty from 'COMPONENTS/base/Empty'
+import withRoot from './withRoot'
 
 const Container = styled.div`
   display: flex;
@@ -70,4 +71,4 @@ const VersionInfo: React.FC = () => {
   )
 }
 
-export default VersionInfo
+export default withRoot(VersionInfo)

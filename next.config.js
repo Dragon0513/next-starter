@@ -1,45 +1,28 @@
 const routers = require('./config/routers')
-const getWebpackConfig = require('./config/webpack.base')
+const withPlugins = require('next-compose-plugins')
 
-module.exports = {
-  webpack: (config, options) => {
-    const { alias, loaders, plugins } = getWebpackConfig(options)
+const withVersionInfo = require('./config/plugins/version-info')
+const withPolyfills = require('./config/plugins/polyfills')
+const withCss = require('./config/plugins/styled-components-css')
+const withSvgSprite = require('./config/plugins/svg-sprite')
+const withSqip = require('./config/plugins/sqip')
+const withNextStarter = require('./config/plugins/next-starter-core')
+const withAlias = require('./config/plugins/alias')
 
-    // Perform customizations to webpack config
-    // Important: return the modified config
-    const originalEntry = config.entry
-    config.entry = async () => {
-      const entries = await originalEntry()
-
-      if (
-        entries['main.js'] &&
-        !entries['main.js'].includes('./src/utils/polyfills.js')
-      ) {
-        entries['main.js'].unshift('./src/utils/polyfills.js')
-      }
-
-      return entries
+module.exports = withPlugins(
+  [
+    withAlias,
+    withVersionInfo,
+    withPolyfills,
+    withCss,
+    withSvgSprite,
+    withSqip,
+    withNextStarter,
+    { versionInfoOptions: {} }
+  ],
+  {
+    exportPathMap: async function () {
+      return routers
     }
-
-    config.resolve.alias = {
-      ...config.resolve.alias,
-      ...alias
-    }
-
-    config.module.rules.push(...loaders)
-
-    config.plugins.push(...plugins)
-
-    config.output.jsonpFunction = 'webpackJsonp_next_starter'
-
-    return config
-  },
-  webpackDevMiddleware: config => {
-    // Perform customizations to webpack dev middleware config
-    // Important: return the modified config
-    return config
-  },
-  exportPathMap: async function () {
-    return routers
   }
-}
+)

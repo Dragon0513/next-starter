@@ -17,9 +17,11 @@ export interface LinkProps
   withoutLineHeight?: boolean
 }
 
-const StyledLink = styled((props: LinkProps) => (
-  <MuiLink {...fp(props, ['withoutLineHeight'])} />
-))`
+const MyLink = (props: LinkProps, ref: React.Ref<HTMLAnchorElement>) => (
+  <MuiLink {...fp(props, ['withoutLineHeight'])} ref={ref} />
+)
+
+const StyledLink = styled(React.forwardRef(MyLink))`
   ${check<LinkProps, keyof LinkProps>('withoutLineHeight')(`
     line-height: 1;
   `)}
@@ -27,31 +29,33 @@ const StyledLink = styled((props: LinkProps) => (
 
 const { host, target: exportTarget, staticSuffix } = env
 
-const Link: React.ComponentType<LinkProps> = props => {
-  const { href, children, ...other } = props
+const Link: React.ComponentType<LinkProps> = React.forwardRef(
+  (props, ref: React.Ref<HTMLAnchorElement>) => {
+    const { href, children, ...other } = props
 
-  const res = formatUrl(href, {
-    host,
-    target: exportTarget,
-    staticSuffix,
-    routers
-  })
+    const res = formatUrl(href, {
+      host,
+      target: exportTarget,
+      staticSuffix,
+      routers
+    })
 
-  if (!res.next) {
+    if (!res.next) {
+      return (
+        <StyledLink href={res.aHref} {...other} ref={ref}>
+          {children}
+        </StyledLink>
+      )
+    }
+
     return (
-      <StyledLink href={res.aHref} {...other}>
-        {children}
-      </StyledLink>
+      <NextLink href={res.nextHref} as={res.nextAs}>
+        <StyledLink href={res.aHref} {...other} ref={ref}>
+          {children}
+        </StyledLink>
+      </NextLink>
     )
   }
-
-  return (
-    <NextLink href={res.nextHref} as={res.nextAs}>
-      <StyledLink href={res.aHref} {...other}>
-        {children}
-      </StyledLink>
-    </NextLink>
-  )
-}
+)
 
 export default Link

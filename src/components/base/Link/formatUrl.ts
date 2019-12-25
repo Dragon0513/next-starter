@@ -52,7 +52,7 @@ const formatUrl: (
   }
 
   // 代码导出绝对链接
-  if (target !== 'inner') {
+  if (target === 'outer') {
     res.aHref = `//${host}${res.aHref}`
 
     return res

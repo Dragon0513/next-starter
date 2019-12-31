@@ -1,3 +1,9 @@
 module.exports = {
-  port: ''
+  port: '',
+  service: {
+    oss: {
+      bucket: '',
+      region: ''
+    }
+  }
 }

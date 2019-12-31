@@ -2,7 +2,7 @@ import parse from 'url-parse'
 import { Routers } from 'CONFIG/routers'
 
 interface FormatUrlOption {
-  target: string
+  target?: string
   staticSuffix: string
   host: string
   routers: Routers

@@ -14,7 +14,7 @@
     "eslint": "eslint --ext .js,jsx,ts,tsx .",
     "eslint-fix": "eslint --ext .js,jsx,ts,tsx . --fix",
     "stylelint": "stylelint './src/**/*.jsx'",
-    "deploy": "npm run build && next export",
+    "deploy": "npm run build && next export && node ./script/upload.js",
     "deploy-production": "npm install && NODE_ENV=production BUILD_ENV=production npm run deploy",
     "deploy-test": "BUILD_ENV=test npm run deploy"
   },
@@ -96,6 +96,7 @@
     "imagemin-webpack-plugin": "^2.4.2",
     "jest": "^24.9.0",
     "next-compose-plugins": "^2.2.0",
+    "oss-cdn-helper": "0.0.6",
     "prettier": "^1.19.1",
     "prettier-eslint": "^9.0.1",
     "raw-loader": "^4.0.0",

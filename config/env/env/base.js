@@ -4,5 +4,11 @@ module.exports = {
   host: 'localhost:3000',
   staticSuffix: '',
   exportTarget: 'inner',
-  service: {}
+  service: {
+    main: '//localhost:3000/api/v1',
+    oss: {
+      bucket: '',
+      region: ''
+    }
+  }
 }

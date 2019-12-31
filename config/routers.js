@@ -2,7 +2,8 @@
 // const { staticSuffix } = config
 
 const routers = [
-  '/index'
+  '/index',
+  '/version'
   // { key: '/api', page: '/apiPage' }
   // { key: '/weather/api', page: '/redirect/api' },
 ]

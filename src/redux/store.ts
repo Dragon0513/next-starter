@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware, Store } from 'redux'
+import { createStore, applyMiddleware, Store, Middleware } from 'redux'
 import { autoDispatch } from 'redux-control'
 
 import thunk from 'redux-thunk'
@@ -7,10 +7,9 @@ import env from 'CONFIG/env'
 
 import reducers from '../redux/reducers'
 
-const middleware = [thunk]
+const middleware: Middleware[] = [thunk]
 
 if (env.env !== 'production') {
-  // @ts-ignore
   middleware.push(createLogger({}))
 }
 

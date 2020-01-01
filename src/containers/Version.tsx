@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Typography from 'COMPONENTS/base/Typography'
 import Empty from 'COMPONENTS/base/Empty'
-import withRoot from './withRoot'
+import withRoot from 'CONTAINERS/withRoot'
 
 const Container = styled.div`
   display: flex;

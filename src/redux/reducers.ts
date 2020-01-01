@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
-import { useReduxSetter } from 'redux-control'
+import useReduxControl from 'redux-control'
 
 import app from './app/reducers'
 
-export default useReduxSetter(combineReducers({ app }))
+export default useReduxControl(combineReducers({ app }))
